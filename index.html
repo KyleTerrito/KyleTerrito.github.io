@@ -434,7 +434,7 @@
               </div>
 
               <p class="tiny" style="margin-top:12px; opacity:.9;">
-                Tip: Replace the text + images with yours, and this becomes *your* story.
+                <!-- Tip: Replace the text + images with yours, and this becomes *your* story. -->
               </p>
             </div>
 
@@ -456,15 +456,15 @@
 
           <div class="gallery-grid" id="gallery">
             <!-- Replace these with your real images in /images -->
-            <div class="tile"><img src="images\\1.jpg" alt="Us 1"></div>
-            <div class="tile"><img src="images\\2.jpg" alt="Us 2"></div>
-            <div class="tile"><img src="images\\3.jpg" alt="Us 3"></div>
-            <div class="tile"><img src="images\\4.jpg" alt="Us 4"></div>
-            <div class="tile"><img src="images\\5.jpg" alt="Us 5"></div>
-            <div class="tile"><img src="images\\6.jpg" alt="Us 6"></div>
-            <div class="tile"><img src="images\\7.jpg" alt="Us 7"></div>
-            <div class="tile"><img src="images\\8.jpg" alt="Us 8"></div>
-          </div>
+            <div class="tile"><img src="images\\1.jpg" alt="Us 1" data-message="Always looking fab!"></div>
+            <div class="tile"><img src="images\\2.jpg" alt="Us 2" data-message="I'm glad we got to go to some sports games."></div>
+            <div class="tile"><img src="images\\3.jpg" alt="Us 3" data-message="Always trying to be me!!"></div>
+            <div class="tile"><img src="images\\4.jpg" alt="Us 4" data-message="Diesel said he likes me more..."></div>
+            <div class="tile"><img src="images\\5.jpg" alt="Us 5" data-message="I'm excited to try more wine!"></div>
+            <div class="tile"><img src="images\\6.jpg" alt="Us 6" data-message="It's always beignet time!"></div>
+            <div class="tile"><img src="images\\7.jpg" alt="Us 7" data-message="We should try more new restraunts!"></div>
+            <div class="tile"><img src="images\\8.jpg" alt="Us 8" data-message="Bring back the digital camera!"></div>
+          </div>          
         </section>
 
         <!-- PAGE 3: THE QUESTION -->
@@ -502,6 +502,7 @@
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox-inner">
       <button class="x" id="closeLb" aria-label="Close">✕</button>
+      <h3 id="lbCaption" style="margin:0 0 10px; text-align:center;"></h3>
       <img id="lbImg" src="" alt="Expanded photo">
     </div>
   </div>
@@ -575,7 +576,7 @@
     surprise.addEventListener('click', ()=>{
       emoji.textContent = emojiList[Math.floor(Math.random()*emojiList.length)];
       burstHearts(18);
-      confettiBlast(80);
+      // confettiBlast(80);
     });
 
     // ====== FLOATING HEARTS BACKGROUND ======
@@ -616,6 +617,7 @@
     // ====== GALLERY LIGHTBOX ======
     const lightbox = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
+    const lbCaption = document.getElementById('lbCaption');
     document.getElementById('closeLb').addEventListener('click', ()=> lightbox.classList.remove('active'));
     lightbox.addEventListener('click', (e)=> {
       if(e.target === lightbox) lightbox.classList.remove('active');
@@ -625,6 +627,7 @@
       img.addEventListener('click', ()=>{
         lbImg.src = img.src;
         lbImg.alt = img.alt || "Photo";
+        lbCaption.textContent = img.dataset.message || "";
         lightbox.classList.add('active');
       });
     });
