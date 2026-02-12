@@ -102,8 +102,6 @@
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
     }
     .pill{
       border: 1px solid rgba(255,255,255,.25);
@@ -113,39 +111,12 @@
       border-radius: 999px;
       cursor:pointer;
       user-select:none;
-      transition: transform .12s ease, background .12s ease, opacity .12s ease;
+      transition: transform .12s ease, background .12s ease;
       font-weight: 600;
       font-size: 14px;
     }
     .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,.18); }
     .pill:active{ transform: translateY(0px); }
-    .pill[disabled]{
-      opacity:.45;
-      cursor:not-allowed;
-      transform:none;
-    }
-    .pill[disabled]:hover{ transform:none; background: rgba(255,255,255,.12); }
-
-    .status-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(0,0,0,.12);
-      font-weight: 800;
-      font-size: 13px;
-      letter-spacing: .01em;
-      white-space:nowrap;
-    }
-    .status-dot{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background: rgba(255,255,255,.55);
-    }
-    .status-dot.ok{ background: rgba(255,255,255,.92); }
 
     main{
       padding: 18px;
@@ -190,7 +161,6 @@
       border: 1px solid rgba(255,255,255,0.15);
       font-size: 16px;
       min-height: 58px;
-      white-space: pre-wrap;
     }
     .big-emoji{
       display:flex;
@@ -228,7 +198,7 @@
       font-weight: 800;
       color: #2b0a3d;
       background: #fff;
-      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      transition: transform .12s ease, box-shadow .12s ease;
       box-shadow: 0 10px 30px rgba(0,0,0,.22);
     }
     .btn:hover{ transform: translateY(-1px); }
@@ -238,11 +208,6 @@
       background: rgba(255,255,255,.12);
       border: 1px solid rgba(255,255,255,.25);
       box-shadow:none;
-    }
-    .btn[disabled]{
-      opacity:.55;
-      cursor:not-allowed;
-      transform:none;
     }
 
     /* Gallery */
@@ -432,185 +397,6 @@
     }
 
     a{ color:#fff; }
-
-    /* ====== CAPTCHA PAGE (dynamic & professional) ====== */
-    .captcha-wrap{
-      display:grid;
-      gap: 14px;
-    }
-    .captcha-top{
-      text-align:center;
-      padding: 10px 6px 0;
-    }
-    .captcha-top h2{
-      margin: 0 0 6px;
-      font-size: clamp(22px, 3.2vw, 34px);
-      letter-spacing:-0.01em;
-    }
-    .captcha-top p{
-      margin: 0;
-      opacity: .95;
-      line-height:1.5;
-    }
-    .captcha-panel{
-      margin-top: 10px;
-      padding: 14px;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,.12);
-    }
-    .captcha-row{
-      display:flex;
-      gap: 12px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .checkbox{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.10);
-      cursor:pointer;
-      user-select:none;
-      font-weight: 800;
-    }
-    .checkbox input{
-      width: 18px;
-      height: 18px;
-      accent-color: white;
-    }
-    .captcha-meta{
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
-      opacity:.95;
-      font-weight:800;
-      font-size: 13px;
-    }
-    .chip{
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.10);
-      white-space:nowrap;
-    }
-    .challenge{
-      display:none;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,.14);
-    }
-    .challenge.active{ display:block; }
-
-    .challenge-head{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap: 10px;
-      flex-wrap:wrap;
-      margin-bottom: 10px;
-    }
-    .prompt{
-      font-weight: 900;
-      font-size: 15px;
-    }
-    .hint{
-      opacity: .9;
-      font-size: 13px;
-      margin-top: 6px;
-      line-height:1.4;
-    }
-
-    .captcha-grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    @media (max-width: 650px){
-      .captcha-grid{ grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .captcha-tile{
-      position:relative;
-      border-radius: 16px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,0.18);
-      aspect-ratio: 1 / 1;
-      cursor:pointer;
-      transition: transform .12s ease;
-    }
-    .captcha-tile:hover{ transform: translateY(-2px) scale(1.01); }
-    .captcha-tile img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      user-select:none;
-      -webkit-user-drag:none;
-      filter: saturate(1.08);
-      transform: scale(1.02);
-    }
-    .captcha-tile.selected{
-      outline: 3px solid rgba(255,255,255,.88);
-      box-shadow: 0 18px 40px rgba(0,0,0,.25);
-    }
-    .captcha-tile.selected:after{
-      content:"✓";
-      position:absolute;
-      right:10px; top:10px;
-      width: 28px; height: 28px;
-      border-radius: 10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: rgba(255,255,255,.88);
-      color:#2b0a3d;
-      font-weight: 900;
-    }
-
-    .captcha-actions{
-      display:flex;
-      gap: 10px;
-      flex-wrap:wrap;
-      justify-content:center;
-      margin-top: 12px;
-    }
-    .captcha-msg{
-      text-align:center;
-      min-height: 22px;
-      font-weight: 900;
-      margin-top: 8px;
-      letter-spacing:-0.01em;
-    }
-    .captcha-msg.ok{ opacity:.98; }
-    .captcha-msg.err{ opacity:.98; }
-
-    .loader{
-      display:none;
-      align-items:center;
-      gap: 10px;
-      justify-content:center;
-      margin-top: 10px;
-      opacity:.92;
-      font-weight: 800;
-    }
-    .loader.active{ display:flex; }
-    .spinner{
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,.35);
-      border-top-color: rgba(255,255,255,.95);
-      animation: spin .9s linear infinite;
-    }
-    @keyframes spin{ to{ transform: rotate(360deg); } }
   </style>
 </head>
 
@@ -622,17 +408,11 @@
     <div class="card">
       <header>
         <div class="dots" aria-label="progress">
-          <div class="dot" id="dot1"></div>
+          <div class="dot active" id="dot1"></div>
           <div class="dot" id="dot2"></div>
           <div class="dot" id="dot3"></div>
         </div>
-
         <div class="nav">
-          <span class="status-badge" id="lockBadge" aria-live="polite">
-            <span class="status-dot" id="lockDot"></span>
-            <span id="lockText">Locked</span>
-          </span>
-
           <button class="pill" data-go="1">Intro</button>
           <button class="pill" data-go="2">Gallery</button>
           <button class="pill" data-go="3">Question</button>
@@ -640,61 +420,8 @@
       </header>
 
       <main>
-        <!-- PAGE 0: VERIFICATION -->
-        <section class="page" id="page0">
-          <div class="captcha-wrap">
-            <div class="captcha-top">
-              <h1 style="margin:0 0 6px;">Verification 💗</h1>
-              <p class="subtitle" style="margin:0;">
-                Just a tiny personalized check — because this site is for <b>you</b>.
-              </p>
-            </div>
-
-            <div class="captcha-panel">
-              <div class="captcha-row">
-                <label class="checkbox">
-                  <input type="checkbox" id="robotCheck">
-                  I am not a robot
-                </label>
-
-                <div class="captcha-meta">
-                  <span class="chip" id="captchaStep">Step 1 of 2</span>
-                  <span class="chip" id="captchaSelectCount">Selected 0</span>
-                </div>
-              </div>
-
-              <div class="loader" id="captchaLoader" aria-hidden="true">
-                <span class="spinner"></span>
-                <span>Generating challenge…</span>
-              </div>
-
-              <div class="challenge" id="challenge">
-                <div class="challenge-head">
-                  <div>
-                    <div class="prompt" id="captchaPrompt">
-                      Select these 3 images: <span id="captchaTarget">Diesel 🐶, the football game 🏈, and the digital camera 📷</span>
-                    </div>
-                    <div class="hint">
-                      Click to select/unselect. Then hit <b>Verify</b>. You must select <b>exactly 3</b>.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="captcha-grid" id="captchaGrid" aria-label="image challenge"></div>
-
-                <div class="captcha-actions">
-                  <button class="btn secondary" id="clearSelection">Clear</button>
-                  <button class="btn" id="verifyCaptcha">Verify ✅</button>
-                </div>
-
-                <div class="captcha-msg" id="captchaMsg" aria-live="polite"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <!-- PAGE 1: INTRO -->
-        <section class="page" id="page1">
+        <section class="page active" id="page1">
           <div class="hero">
             <div>
               <h1 id="title">Hiiii 💖</h1>
@@ -730,16 +457,15 @@
 
           <div class="gallery-grid" id="gallery">
             <!-- Replace these with your real images in /images -->
-            <!-- data-tags used by the verification gate -->
-            <div class="tile"><img src="images\\1.jpg" alt="Us 1" data-message="Always looking fab!" data-tags="none"></div>
-            <div class="tile"><img src="images\\2.jpg" alt="Us 2" data-message="Your first real football experience." data-tags="football"></div>
-            <div class="tile"><img src="images\\3.jpg" alt="Us 3" data-message="Always trying to be me!!" data-tags="none"></div>
-            <div class="tile"><img src="images\\4.jpg" alt="Us 4" data-message="Diesel said he likes me more..." data-tags="diesel"></div>
-            <div class="tile"><img src="images\\5.jpg" alt="Us 5" data-message="I'm excited to try more wine!" data-tags="none"></div>
-            <div class="tile"><img src="images\\6.jpg" alt="Us 6" data-message="The sports bar experience!" data-tags="none"></div>
-            <div class="tile"><img src="images\\7.jpg" alt="Us 7" data-message="We should try more new restraunts!" data-tags="none"></div>
-            <div class="tile"><img src="images\\8.jpg" alt="Us 8" data-message="Bring back the digital camera!" data-tags="camera"></div>
-          </div>
+            <div class="tile"><img src="images\\1.jpg" alt="Us 1" data-message="Always looking fab!"></div>
+            <div class="tile"><img src="images\\2.jpg" alt="Us 2" data-message="I'm glad we got to go to some sports games."></div>
+            <div class="tile"><img src="images\\3.jpg" alt="Us 3" data-message="Always trying to be me!!"></div>
+            <div class="tile"><img src="images\\4.jpg" alt="Us 4" data-message="Diesel said he likes me more..."></div>
+            <div class="tile"><img src="images\\5.jpg" alt="Us 5" data-message="I'm excited to try more wine!"></div>
+            <div class="tile"><img src="images\\6.jpg" alt="Us 6" data-message="Your first real football experience!"></div>
+            <div class="tile"><img src="images\\7.jpg" alt="Us 7" data-message="We should try more new restraunts!"></div>
+            <div class="tile"><img src="images\\8.jpg" alt="Us 8" data-message="Bring back the digital camera!"></div>
+          </div>          
         </section>
 
         <!-- PAGE 3: THE QUESTION -->
@@ -767,7 +493,7 @@
       </main>
 
       <footer>
-        <div>Made with 💗 by <span id="by">Kyle Dorito</span></div>
+        <div>Made with 💗 by <span id="by">Kyle</span></div>
         <div class="tiny">GitHub Pages ready • no frameworks</div>
       </footer>
     </div>
@@ -783,56 +509,22 @@
   </div>
 
   <script>
-    // ====== SIMPLE "PAGES" NAV (with verification gate) ======
-    const pages = [
-      document.getElementById('page0'),
-      document.getElementById('page1'),
-      document.getElementById('page2'),
-      document.getElementById('page3')
-    ];
-    const dots = [
-      document.getElementById('dot1'),
-      document.getElementById('dot2'),
-      document.getElementById('dot3')
-    ];
-
-    const navPills = document.querySelectorAll('[data-go]');
-    const lockText = document.getElementById('lockText');
-    const lockDot = document.getElementById('lockDot');
-
-    let unlocked = false;
-
-    function setNavLocked(isLocked){
-      navPills.forEach(btn=>{
-        btn.disabled = isLocked;
-        btn.setAttribute('aria-disabled', isLocked ? 'true' : 'false');
-      });
-      lockText.textContent = isLocked ? "Locked" : "Unlocked";
-      lockDot.classList.toggle('ok', !isLocked);
-    }
+    // ====== SIMPLE "PAGES" NAV ======
+    const pages = [null, document.getElementById('page1'), document.getElementById('page2'), document.getElementById('page3')];
+    const dots = [null, document.getElementById('dot1'), document.getElementById('dot2'), document.getElementById('dot3')];
 
     function goPage(n){
-      // n: 0..3 where 0 is verification
-      if(!unlocked && n !== 0) n = 0;
-
-      for(let i=0;i<=3;i++){
+      for(let i=1;i<=3;i++){
         pages[i].classList.toggle('active', i===n);
+        dots[i].classList.toggle('active', i===n);
       }
-
-      // dots represent pages 1..3 only
-      for(let i=0;i<3;i++){
-        const pageIndex = i + 1; // 1..3
-        dots[i].classList.toggle('active', pageIndex === n);
-      }
-
+      // little "pop" heart burst on page switch
       burstHearts(10);
       window.scrollTo({top:0, behavior:"smooth"});
     }
 
-    navPills.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        goPage(Number(btn.dataset.go));
-      });
+    document.querySelectorAll('[data-go]').forEach(btn=>{
+      btn.addEventListener('click', ()=> goPage(Number(btn.dataset.go)));
     });
 
     document.getElementById('toGallery').addEventListener('click', ()=> goPage(2));
@@ -844,16 +536,12 @@
       typeStart();
     });
 
-    // Start locked on verification page
-    setNavLocked(true);
-    goPage(0);
-
     // ====== TYPEWRITER INTRO ======
     const typebox = document.getElementById('typebox');
     const lines = [
       "Hiii 😌",
       "I wanted to do something small but memorable.",
-      "So here’s a website I made for you 💘"
+      "So here’s a little journey 💘"
     ];
     let typingTimer;
 
@@ -880,6 +568,7 @@
       }
       tick();
     }
+    typeStart();
 
     // Surprise button: rotates emoji + mini confetti
     const emoji = document.getElementById('emoji');
@@ -1015,172 +704,6 @@
 
       setTimeout(()=> confetti.classList.remove('active'), 4000);
     }
-
-    // ====== PERSONALIZED CAPTCHA (FIXED PROMPT: choose 3 specific images) ======
-    const robotCheck = document.getElementById('robotCheck');
-    const captchaGrid = document.getElementById('captchaGrid');
-    const captchaMsg = document.getElementById('captchaMsg');
-    const challengeEl = document.getElementById('challenge');
-    const captchaLoader = document.getElementById('captchaLoader');
-    const captchaSelectCount = document.getElementById('captchaSelectCount');
-    const captchaStep = document.getElementById('captchaStep');
-
-    const captchaPrompt = document.getElementById('captchaPrompt');
-    const captchaTarget = document.getElementById('captchaTarget');
-
-    const clearSelection = document.getElementById('clearSelection');
-    const verifyCaptcha = document.getElementById('verifyCaptcha');
-
-    // REQUIRED: exactly these 3 tags must be selected (one per image)
-    const REQUIRED_KEYS = ["diesel", "football", "camera"];
-
-    function shuffle(arr){
-      const a = arr.slice();
-      for(let i=a.length-1;i>0;i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [a[i], a[j]] = [a[j], a[i]];
-      }
-      return a;
-    }
-
-    function splitTags(tagStr){
-      return (tagStr || "")
-        .toLowerCase()
-        .split(/\s+/)
-        .filter(Boolean);
-    }
-
-    function galleryItems(){
-      return Array.from(document.querySelectorAll('#gallery .tile img')).map(img=>{
-        return {
-          src: img.src,
-          alt: img.alt || "Photo",
-          tags: splitTags(img.dataset.tags),
-          message: img.dataset.message || ""
-        };
-      });
-    }
-
-    function buildCaptchaGrid(){
-      captchaGrid.innerHTML = "";
-      const items = shuffle(galleryItems());
-
-      items.forEach(item=>{
-        const tile = document.createElement('div');
-        tile.className = "captcha-tile";
-        tile.dataset.tags = item.tags.join(" ");
-
-        const im = document.createElement('img');
-        im.src = item.src;
-        im.alt = item.alt;
-
-        tile.appendChild(im);
-
-        tile.addEventListener('click', ()=>{
-          tile.classList.toggle('selected');
-          captchaMsg.textContent = "";
-          captchaMsg.className = "captcha-msg";
-          updateSelectedCount();
-        });
-
-        captchaGrid.appendChild(tile);
-      });
-    }
-
-    function updateSelectedCount(){
-      const selected = captchaGrid.querySelectorAll('.captcha-tile.selected').length;
-      captchaSelectCount.textContent = `Selected ${selected}`;
-    }
-
-    function showLoader(on){
-      captchaLoader.classList.toggle('active', !!on);
-      captchaLoader.setAttribute('aria-hidden', on ? 'false' : 'true');
-    }
-
-    function tileHasTag(tile, key){
-      const tags = splitTags(tile.dataset.tags);
-      return tags.includes(key);
-    }
-
-    function clearCaptchaSelection(){
-      captchaGrid.querySelectorAll('.captcha-tile').forEach(t=> t.classList.remove('selected'));
-      updateSelectedCount();
-      captchaMsg.textContent = "";
-      captchaMsg.className = "captcha-msg";
-    }
-
-    function promptText(){
-      return "Diesel 🐶, the football game 🏈, and the digital camera 📷";
-    }
-
-    // Ensure the single prompt text is set (in case you change HTML later)
-    captchaTarget.textContent = promptText();
-    captchaPrompt.innerHTML = `Select these 3 images: <span id="captchaTarget">${promptText()}</span>`;
-
-    robotCheck.addEventListener('change', ()=>{
-      if(robotCheck.checked){
-        captchaStep.textContent = "Step 2 of 2";
-        challengeEl.classList.add('active');
-        showLoader(true);
-
-        setTimeout(()=>{
-          buildCaptchaGrid();
-          clearCaptchaSelection();
-          showLoader(false);
-          burstHearts(10);
-        }, 650);
-      } else {
-        captchaStep.textContent = "Step 1 of 2";
-        challengeEl.classList.remove('active');
-        showLoader(false);
-        captchaMsg.textContent = "";
-        captchaMsg.className = "captcha-msg";
-        clearCaptchaSelection();
-      }
-    });
-
-    clearSelection.addEventListener('click', ()=>{
-      clearCaptchaSelection();
-      burstHearts(6);
-    });
-
-    verifyCaptcha.addEventListener('click', ()=>{
-      const tiles = Array.from(captchaGrid.querySelectorAll('.captcha-tile'));
-      const selected = tiles.filter(t => t.classList.contains('selected'));
-
-      // Must be exactly 3 selections
-      if(selected.length !== 3){
-        captchaMsg.textContent = `Select exactly 3 images 🙈 (you picked ${selected.length}).`;
-        captchaMsg.className = "captcha-msg err";
-        burstHearts(10);
-        return;
-      }
-
-      // Each selected tile must match at least one required key
-      const eachIsValid = selected.every(t => REQUIRED_KEYS.some(k => tileHasTag(t, k)));
-
-      // And collectively they must cover ALL 3 keys (diesel + football + camera)
-      const coversAll = REQUIRED_KEYS.every(k => selected.some(t => tileHasTag(t, k)));
-
-      if(eachIsValid && coversAll){
-        captchaMsg.textContent = "Verified 💞";
-        captchaMsg.className = "captcha-msg ok";
-        confettiBlast(160);
-        burstHearts(26);
-
-        unlocked = true;
-        setNavLocked(false);
-
-        setTimeout(()=>{
-          goPage(1);
-          typeStart();
-        }, 700);
-      } else {
-        captchaMsg.textContent = "Not quite 😅 Pick Diesel, the football game, and the digital camera.";
-        captchaMsg.className = "captcha-msg err";
-        burstHearts(10);
-      }
-    });
 
     // ====== Optional: Set your name in footer ======
     document.getElementById('by').textContent = "Kyle";

@@ -646,7 +646,7 @@
             <div class="captcha-top">
               <h1 style="margin:0 0 6px;">Verification 💗</h1>
               <p class="subtitle" style="margin:0;">
-                Just a tiny personalized check — because this site is for <b>you</b>.
+                Please verify that you are the... <b>Hale Greer</b>.
               </p>
             </div>
 
@@ -672,12 +672,13 @@
                 <div class="challenge-head">
                   <div>
                     <div class="prompt" id="captchaPrompt">
-                      Select these 3 images: <span id="captchaTarget">Diesel 🐶, the football game 🏈, and the digital camera 📷</span>
+                      Select all images that match: <span id="captchaTarget">sports game</span>
                     </div>
                     <div class="hint">
-                      Click to select/unselect. Then hit <b>Verify</b>. You must select <b>exactly 3</b>.
+                      Click to select/unselect. Then hit <b>Verify</b>.
                     </div>
                   </div>
+                  <!-- <button class="btn secondary" id="newChallenge">New prompt</button> -->
                 </div>
 
                 <div class="captcha-grid" id="captchaGrid" aria-label="image challenge"></div>
@@ -730,14 +731,14 @@
 
           <div class="gallery-grid" id="gallery">
             <!-- Replace these with your real images in /images -->
-            <!-- data-tags used by the verification gate -->
+            <!-- Added data-tags for the personalized verification grid -->
             <div class="tile"><img src="images\\1.jpg" alt="Us 1" data-message="Always looking fab!" data-tags="none"></div>
-            <div class="tile"><img src="images\\2.jpg" alt="Us 2" data-message="Your first real football experience." data-tags="football"></div>
+            <div class="tile"><img src="images\\2.jpg" alt="Us 2" data-message="I'm glad we got to go to some sports games." data-tags="sports"></div>
             <div class="tile"><img src="images\\3.jpg" alt="Us 3" data-message="Always trying to be me!!" data-tags="none"></div>
             <div class="tile"><img src="images\\4.jpg" alt="Us 4" data-message="Diesel said he likes me more..." data-tags="diesel"></div>
-            <div class="tile"><img src="images\\5.jpg" alt="Us 5" data-message="I'm excited to try more wine!" data-tags="none"></div>
-            <div class="tile"><img src="images\\6.jpg" alt="Us 6" data-message="The sports bar experience!" data-tags="none"></div>
-            <div class="tile"><img src="images\\7.jpg" alt="Us 7" data-message="We should try more new restraunts!" data-tags="none"></div>
+            <div class="tile"><img src="images\\5.jpg" alt="Us 5" data-message="I'm excited to try more wine!" data-tags="wine"></div>
+            <div class="tile"><img src="images\\6.jpg" alt="Us 6" data-message="Your first real football experience!" data-tags="football"></div>
+            <div class="tile"><img src="images\\7.jpg" alt="Us 7" data-message="We should try more new restraunts!" data-tags="restaurants"></div>
             <div class="tile"><img src="images\\8.jpg" alt="Us 8" data-message="Bring back the digital camera!" data-tags="camera"></div>
           </div>
         </section>
@@ -797,6 +798,7 @@
     ];
 
     const navPills = document.querySelectorAll('[data-go]');
+    const lockBadge = document.getElementById('lockBadge');
     const lockText = document.getElementById('lockText');
     const lockDot = document.getElementById('lockDot');
 
@@ -853,7 +855,7 @@
     const lines = [
       "Hiii 😌",
       "I wanted to do something small but memorable.",
-      "So here’s a website I made for you 💘"
+      "So here’s your website 💘"
     ];
     let typingTimer;
 
@@ -1016,23 +1018,30 @@
       setTimeout(()=> confetti.classList.remove('active'), 4000);
     }
 
-    // ====== PERSONALIZED CAPTCHA (FIXED PROMPT: choose 3 specific images) ======
+    // ====== PERSONALIZED CAPTCHA (DYNAMIC GRID FROM YOUR GALLERY) ======
     const robotCheck = document.getElementById('robotCheck');
     const captchaGrid = document.getElementById('captchaGrid');
     const captchaMsg = document.getElementById('captchaMsg');
+    const captchaTarget = document.getElementById('captchaTarget');
+    const captchaPrompt = document.getElementById('captchaPrompt');
+    const newChallenge = document.getElementById('newChallenge');
+    const clearSelection = document.getElementById('clearSelection');
+    const verifyCaptcha = document.getElementById('verifyCaptcha');
     const challengeEl = document.getElementById('challenge');
     const captchaLoader = document.getElementById('captchaLoader');
     const captchaSelectCount = document.getElementById('captchaSelectCount');
     const captchaStep = document.getElementById('captchaStep');
 
-    const captchaPrompt = document.getElementById('captchaPrompt');
-    const captchaTarget = document.getElementById('captchaTarget');
+    // Prompts MUST match tags used in your gallery image data-tags.
+    const challenges = [
+      { key: "sports", label: "sports game 🏟️" },
+      { key: "diesel", label: "Diesel 🐶" },
+      { key: "wine", label: "wine 🍷" },
+      { key: "restaurants", label: "new restaurants 🍽️" },
+      { key: "camera", label: "digital camera vibes 📷" }
+    ];
 
-    const clearSelection = document.getElementById('clearSelection');
-    const verifyCaptcha = document.getElementById('verifyCaptcha');
-
-    // REQUIRED: exactly these 3 tags must be selected (one per image)
-    const REQUIRED_KEYS = ["diesel", "football", "camera"];
+    let currentChallenge = challenges[0];
 
     function shuffle(arr){
       const a = arr.slice();
@@ -1075,7 +1084,6 @@
         im.alt = item.alt;
 
         tile.appendChild(im);
-
         tile.addEventListener('click', ()=>{
           tile.classList.toggle('selected');
           captchaMsg.textContent = "";
@@ -1090,6 +1098,20 @@
     function updateSelectedCount(){
       const selected = captchaGrid.querySelectorAll('.captcha-tile.selected').length;
       captchaSelectCount.textContent = `Selected ${selected}`;
+    }
+
+    function setChallenge(ch){
+      currentChallenge = ch;
+      captchaTarget.textContent = ch.label;
+      captchaPrompt.innerHTML = `Select all images that match: <span id="captchaTarget">${ch.label}</span>`;
+      captchaMsg.textContent = "";
+      captchaMsg.className = "captcha-msg";
+      updateSelectedCount();
+    }
+
+    function randomChallenge(){
+      const next = challenges[Math.floor(Math.random()*challenges.length)];
+      setChallenge(next);
     }
 
     function showLoader(on){
@@ -1109,13 +1131,18 @@
       captchaMsg.className = "captcha-msg";
     }
 
-    function promptText(){
-      return "Diesel 🐶, the football game 🏈, and the digital camera 📷";
+    function expectedCount(){
+      const tiles = Array.from(captchaGrid.querySelectorAll('.captcha-tile'));
+      return tiles.filter(t => tileHasTag(t, currentChallenge.key)).length;
     }
 
-    // Ensure the single prompt text is set (in case you change HTML later)
-    captchaTarget.textContent = promptText();
-    captchaPrompt.innerHTML = `Select these 3 images: <span id="captchaTarget">${promptText()}</span>`;
+    function ensureChallengeIsValid(){
+      // If the chosen challenge has zero matching tiles, pick a different one.
+      for(let i=0;i<8;i++){
+        if(expectedCount() > 0) return;
+        randomChallenge();
+      }
+    }
 
     robotCheck.addEventListener('change', ()=>{
       if(robotCheck.checked){
@@ -1123,8 +1150,11 @@
         challengeEl.classList.add('active');
         showLoader(true);
 
+        // Slightly "professional" load moment
         setTimeout(()=>{
           buildCaptchaGrid();
+          randomChallenge();
+          ensureChallengeIsValid();
           clearCaptchaSelection();
           showLoader(false);
           burstHearts(10);
@@ -1139,6 +1169,13 @@
       }
     });
 
+    newChallenge.addEventListener('click', ()=>{
+      randomChallenge();
+      ensureChallengeIsValid();
+      clearCaptchaSelection();
+      burstHearts(8);
+    });
+
     clearSelection.addEventListener('click', ()=>{
       clearCaptchaSelection();
       burstHearts(6);
@@ -1147,22 +1184,14 @@
     verifyCaptcha.addEventListener('click', ()=>{
       const tiles = Array.from(captchaGrid.querySelectorAll('.captcha-tile'));
       const selected = tiles.filter(t => t.classList.contains('selected'));
+      const shouldBeSelected = tiles.filter(t => tileHasTag(t, currentChallenge.key));
 
-      // Must be exactly 3 selections
-      if(selected.length !== 3){
-        captchaMsg.textContent = `Select exactly 3 images 🙈 (you picked ${selected.length}).`;
-        captchaMsg.className = "captcha-msg err";
-        burstHearts(10);
-        return;
-      }
+      // exact match
+      const okCount = selected.length === shouldBeSelected.length;
+      const allCorrectChosen = shouldBeSelected.every(t => t.classList.contains('selected'));
+      const noExtras = selected.every(t => tileHasTag(t, currentChallenge.key));
 
-      // Each selected tile must match at least one required key
-      const eachIsValid = selected.every(t => REQUIRED_KEYS.some(k => tileHasTag(t, k)));
-
-      // And collectively they must cover ALL 3 keys (diesel + football + camera)
-      const coversAll = REQUIRED_KEYS.every(k => selected.some(t => tileHasTag(t, k)));
-
-      if(eachIsValid && coversAll){
+      if(okCount && allCorrectChosen && noExtras && shouldBeSelected.length > 0){
         captchaMsg.textContent = "Verified 💞";
         captchaMsg.className = "captcha-msg ok";
         confettiBlast(160);
@@ -1176,7 +1205,12 @@
           typeStart();
         }, 700);
       } else {
-        captchaMsg.textContent = "Not quite 😅 Pick Diesel, the football game, and the digital camera.";
+        const need = shouldBeSelected.length;
+        captchaMsg.textContent = pick([
+          `Not quite 😅 (You should select ${need} image${need===1 ? "" : "s"}.)`,
+          "Close! Select ONLY the matching ones 🤭",
+          "Nope 🙈 Double-check your selections!"
+        ]);
         captchaMsg.className = "captcha-msg err";
         burstHearts(10);
       }
