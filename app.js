@@ -12,7 +12,7 @@ const teams = [
   ["Tennessee Titans", "ten"], ["Washington Commanders", "wsh"]
 ];
 
-const STORAGE_KEY = "nfl-futures-board-v1";
+const STORAGE_KEY = "nfl-futures-board-v2";
 const board = document.querySelector("#team-board");
 const template = document.querySelector("#team-template");
 const resetButton = document.querySelector("#reset-button");
@@ -43,16 +43,27 @@ function clamp(value, minimum, maximum) {
   return Math.min(Math.max(value, minimum), maximum);
 }
 
+function tierForCard(card) {
+  const poolHeight = parseFloat(getComputedStyle(board).getPropertyValue("--pool-height"));
+  const tierAreaHeight = board.clientHeight - poolHeight;
+  const centerY = parseFloat(card.style.top) + card.offsetHeight / 2;
+  if (centerY >= tierAreaHeight) return "Unranked";
+  return ["S", "A", "B", "C", "D"][clamp(Math.floor(centerY / (tierAreaHeight / 5)), 0, 4)];
+}
+
 function layoutCards() {
   const cards = [...board.querySelectorAll(".team-card")];
   if (!cards.length) return;
   const boardWidth = board.clientWidth;
   const cardWidth = cards[0].offsetWidth;
   const cardHeight = cards[0].offsetHeight;
-  const columns = Math.max(2, Math.floor(boardWidth / cardWidth));
-  const cellWidth = boardWidth / columns;
-  const rowHeight = cardHeight + (boardWidth < 620 ? 13 : 20);
-  const startY = 16;
+  const poolColumns = Math.max(2, Math.floor(boardWidth / cardWidth));
+  const cellWidth = boardWidth / poolColumns;
+  const poolHeight = parseFloat(getComputedStyle(board).getPropertyValue("--pool-height"));
+  const poolTop = board.clientHeight - poolHeight;
+  const poolRows = Math.ceil(cards.length / poolColumns);
+  const poolTopPadding = boardWidth < 620 ? 62 : 58;
+  const poolRowSpace = (poolHeight - poolTopPadding - cardHeight) / Math.max(1, poolRows - 1);
 
   cards.forEach((card, index) => {
     const saved = positions[card.dataset.team];
@@ -62,8 +73,13 @@ function layoutCards() {
       left = saved.x * Math.max(0, boardWidth - cardWidth);
       top = saved.y * Math.max(0, board.clientHeight - cardHeight);
     } else {
-      left = (index % columns) * cellWidth + (cellWidth - cardWidth) / 2;
-      top = Math.floor(index / columns) * rowHeight + startY;
+      const scatteredIndex = (index * 13) % cards.length;
+      const row = Math.floor(scatteredIndex / poolColumns);
+      const column = scatteredIndex % poolColumns;
+      const xJitter = ((index * 17) % 19) - 9;
+      const yJitter = ((index * 23) % 17) - 8;
+      left = column * cellWidth + (cellWidth - cardWidth) / 2 + xJitter;
+      top = poolTop + poolTopPadding + row * poolRowSpace + yJitter;
     }
     card.style.left = `${clamp(left, 0, boardWidth - cardWidth)}px`;
     card.style.top = `${clamp(top, 0, board.clientHeight - cardHeight)}px`;
@@ -96,7 +112,8 @@ function enableDragging(card) {
     card.classList.remove("dragging");
     positions[card.dataset.team] = {
       x: parseFloat(card.style.left) / Math.max(1, board.clientWidth - card.offsetWidth),
-      y: parseFloat(card.style.top) / Math.max(1, board.clientHeight - card.offsetHeight)
+      y: parseFloat(card.style.top) / Math.max(1, board.clientHeight - card.offsetHeight),
+      tier: tierForCard(card)
     };
     savePositions();
     drag = null;

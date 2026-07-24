@@ -1,0 +1,62 @@
+.wins-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  align-items: start;
+  gap: 22px;
+}
+
+.wins-markets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+.win-card {
+  overflow: hidden;
+  border: 1px solid #d8e0e8;
+  border-radius: 13px;
+  background: #f5f7fa;
+  color: #142236;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, .14);
+}
+
+.win-team {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1px solid #dce3ea;
+  background: #fff;
+}
+
+.win-team img { width: 40px; height: 40px; object-fit: contain; }
+.win-team h3 { overflow: hidden; margin: 0; font-size: .82rem; text-overflow: ellipsis; white-space: nowrap; }
+.win-team p { margin: 3px 0 0; color: #718195; font-size: .66rem; }
+.win-line { color: #0b6fa8; font-size: 1.05rem; font-weight: 900; }
+.win-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 9px; }
+
+.win-button {
+  min-height: 49px;
+  padding: 5px 9px;
+  border: 1px solid #78b8db;
+  border-radius: 9px;
+  background: #fff;
+  color: #0875aa;
+  cursor: pointer;
+}
+
+.win-button span, .win-button strong { display: block; }
+.win-button span { margin-bottom: 2px; font-size: .65rem; font-weight: 700; }
+.win-button strong { font-size: .8rem; }
+.win-button:hover { border-color: #1677db; background: #e8f4ff; }
+.win-button:focus-visible { outline: 3px solid #1677db; outline-offset: 2px; }
+.win-button.selected { border-color: #1677db; background: #1677db; color: #fff; box-shadow: 0 4px 12px rgba(22, 119, 219, .25); }
+.wins-picks-list { max-height: 68vh; overflow-y: auto; }
+
+@media (max-width: 850px) {
+  .wins-layout { grid-template-columns: 1fr; }
+  .wins-layout .picks-panel { grid-row: 1; }
+  .wins-picks-list { max-height: 310px; }
+}
+
+@media (max-width: 620px) {
+  .wins-markets { grid-template-columns: 1fr; gap: 10px; }
+  .win-card { border-radius: 11px; }
+}

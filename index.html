@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <nav class="page-nav" aria-label="Main navigation">
+      <a class="nav-link active" href="index.html" aria-current="page">Logo board</a>
+      <a class="nav-link" href="divisions.html">Division winners</a>
+      <a class="nav-link" href="conferences.html">Conference winners</a>
+      <a class="nav-link" href="wins.html">Season wins</a>
+      <a class="nav-link" href="summary.html">Summary</a>
+    </nav>
     <header class="site-header">
       <div>
         <p class="eyebrow">NFL FUTURES</p>
@@ -24,7 +31,14 @@
           <h2 id="board-title">All 32 teams</h2>
           <p><span class="status-dot"></span> Positions save on this device</p>
         </div>
-        <div id="team-board" class="team-board" aria-label="Draggable NFL team logo board"></div>
+        <div id="team-board" class="team-board" aria-label="Draggable NFL team tier board">
+          <div class="tier-zone tier-s" aria-hidden="true"><span>S</span><small>ELITE</small></div>
+          <div class="tier-zone tier-a" aria-hidden="true"><span>A</span><small>CONTENDERS</small></div>
+          <div class="tier-zone tier-b" aria-hidden="true"><span>B</span><small>PLAYOFF</small></div>
+          <div class="tier-zone tier-c" aria-hidden="true"><span>C</span><small>MIDDLE</small></div>
+          <div class="tier-zone tier-d" aria-hidden="true"><span>D</span><small>REBUILD</small></div>
+          <div class="unranked-zone" aria-hidden="true"><span>UNRANKED</span><small>Drag teams into a tier</small></div>
+        </div>
       </section>
     </main>
 

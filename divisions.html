@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#07111f" />
+    <meta name="description" content="Choose your NFL division winners." />
+    <title>Division Winners — NFL Futures</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="divisions.css" />
+  </head>
+  <body>
+    <nav class="page-nav" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Logo board</a>
+      <a class="nav-link active" href="divisions.html" aria-current="page">Division winners</a>
+      <a class="nav-link" href="conferences.html">Conference winners</a>
+      <a class="nav-link" href="wins.html">Season wins</a>
+      <a class="nav-link" href="summary.html">Summary</a>
+    </nav>
+
+    <header class="site-header divisions-header">
+      <div>
+        <p class="eyebrow">MAKE YOUR PICKS</p>
+        <h1>Division winners.</h1>
+        <p class="subtitle">Choose one team per division and record the latest odds.</p>
+      </div>
+      <button id="clear-picks" class="reset-button" type="button">Clear picks</button>
+    </header>
+
+    <main class="divisions-layout">
+      <section aria-labelledby="markets-title">
+        <div class="section-label">
+          <h2 id="markets-title">NFL division winner</h2>
+          <p>8 markets</p>
+        </div>
+        <div id="division-markets" class="division-markets"></div>
+      </section>
+
+      <aside class="picks-panel" aria-labelledby="picks-title">
+        <div class="picks-panel-head">
+          <div>
+            <p class="eyebrow">YOUR CARD</p>
+            <h2 id="picks-title">My picks</h2>
+          </div>
+          <strong id="pick-count">0/8</strong>
+        </div>
+        <div class="odds-note">Fixed 2026–27 odds from the provided sportsbook screenshot.</div>
+        <div id="picks-list" class="picks-list"></div>
+        <p id="empty-picks" class="empty-picks">Select a team from each division to build your futures card.</p>
+      </aside>
+    </main>
+
+    <template id="market-template">
+      <article class="market-card">
+        <button class="market-title" type="button" aria-expanded="true">
+          <span></span><span class="chevron" aria-hidden="true">⌃</span>
+        </button>
+        <div class="market-options"></div>
+      </article>
+    </template>
+
+    <script src="divisions.js"></script>
+  </body>
+</html>
