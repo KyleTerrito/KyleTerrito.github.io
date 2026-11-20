@@ -1,6 +1,11 @@
 const panel = document.querySelector('.detail-panel');
 const panelContent = panel.querySelector('.panel-content');
 const detailArticles = [...panelContent.querySelectorAll('[data-scene]')];
+const articleSlots = detailArticles.map(article => {
+  const slot = document.createComment('desktop detail position');
+  article.before(slot);
+  return slot;
+});
 const closePanel = panel.querySelector('.close-panel');
 const verticalCamera = panel.querySelector('.vertical-camera');
 let opener;
@@ -11,6 +16,30 @@ let leftTop = false;
 let dismissing = false;
 let ignoreUpwardWheelUntil = 0;
 let overviewScrollLeft;
+
+function syncInlineDetails() {
+  if (panel.open) return;
+  detailArticles.forEach((article, index) => {
+    const scene = document.getElementById(article.dataset.scene);
+    article.classList.toggle('inline-details', mobile.matches);
+    article.hidden = !mobile.matches;
+    article.inert = false;
+    article.style.removeProperty('visibility');
+    article.style.removeProperty('transform');
+    if (mobile.matches) scene.append(article);
+    else articleSlots[index].after(article);
+  });
+}
+
+function scrollInlineDetail(target) {
+  const article = target.closest('.inline-details');
+  if (!article) return false;
+  const scene = article.parentElement;
+  jump('#' + scene.id, 'instant');
+  const top = scene.scrollTop + target.getBoundingClientRect().top - scene.getBoundingClientRect().top - 12;
+  scene.scrollTo({ top, behavior: reduceMotion.matches ? 'instant' : 'smooth' });
+  return true;
+}
 
 function layoutVertical() {
   if (!panel.open || !detailArticle) return;
@@ -145,6 +174,7 @@ function hideDetail() {
   if (mobile.matches && overviewScrollLeft !== undefined) camera.scrollLeft = overviewScrollLeft;
   overviewScrollLeft = undefined;
   clearSharedFrame();
+  syncInlineDetails();
   render();
   opener?.focus({ preventScroll: true });
   opener = undefined;
@@ -177,6 +207,10 @@ document.addEventListener('click', event => {
   }
   const target = document.getElementById(link.dataset.detail);
   if (!target) return;
+  if (mobile.matches && !panel.open && scrollInlineDetail(target)) {
+    event.preventDefault();
+    return;
+  }
   event.preventDefault();
   if (panel.open && sharedScene?.element.contains(link)) {
     dismissDetail();
@@ -194,6 +228,7 @@ window.addEventListener('wheel', event => {
   if (!panel.open && !event.ctrlKey && event.deltaY < 0 && performance.now() < ignoreUpwardWheelUntil) event.preventDefault();
 }, { passive: false });
 motion.addEventListener('change', layoutVertical);
+mobile.addEventListener('change', syncInlineDetails);
 window.addEventListener('resize', () => {
   clearSharedFrame();
   layoutVertical();
@@ -207,7 +242,12 @@ panel.addEventListener('cancel', event => {
 });
 
 window.addEventListener('popstate', () => {
-  if (!showDetail(detailTarget(location.hash))) hideDetail();
+  const target = detailTarget(location.hash);
+  if (mobile.matches && !panel.open) {
+    if (target) scrollInlineDetail(target);
+    return;
+  }
+  if (!showDetail(target)) hideDetail();
 });
 
 window.addEventListener('pageshow', event => {
@@ -215,9 +255,11 @@ window.addEventListener('pageshow', event => {
   const target = detailTarget(location.hash);
   const scene = target?.closest('[data-scene]')?.dataset.scene;
   if (!scene) return;
+  if (mobile.matches && scrollInlineDetail(target)) return;
   if (!restoringHistory) {
     if (motion.matches || mobile.matches) jump('#' + scene, 'instant');
     else document.getElementById(scene).scrollIntoView();
   }
   showDetail(target);
 });
+syncInlineDetails();

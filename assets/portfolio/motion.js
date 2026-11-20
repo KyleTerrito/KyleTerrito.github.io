@@ -141,6 +141,10 @@ document.addEventListener('click', event => {
       event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   event.preventDefault();
   if (location.hash !== link.hash) history.pushState(null, '', link.hash);
+  if (mobile.matches) {
+    const scene = document.getElementById(link.hash.slice(1))?.closest('.scene');
+    if (scene) scene.scrollTop = 0;
+  }
   jump(link.hash, link.classList.contains('skip') ? 'instant' : 'smooth');
   if (link.classList.contains('skip')) {
     render();

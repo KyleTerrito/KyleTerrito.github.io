@@ -303,12 +303,12 @@ figcaption { color: var(--muted); font-size: .875rem; margin-top: .75rem; }
 }
 .vertical-camera article > * { max-width: 64rem; margin-inline: auto; }
 .vertical-tail { height: var(--reading-tail); }
-.vertical-camera article h2 { font-size: clamp(2.5rem, 6vw, 5rem); color: var(--accent); }
-.vertical-camera article h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); margin: 2rem 0 .5rem; }
-.vertical-camera article ul { padding-inline-start: 1.35rem; }
-.vertical-camera article li + li { margin-top: 1rem; }
-.vertical-camera article img { max-height: 420px; object-fit: contain; }
-.vertical-camera article #publications { scroll-margin-top: 1rem; }
+:is(.vertical-camera article, .inline-details) h2 { font-size: clamp(2.5rem, 6vw, 5rem); color: var(--accent); }
+:is(.vertical-camera article, .inline-details) h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); margin: 2rem 0 .5rem; }
+:is(.vertical-camera article, .inline-details) ul { padding-inline-start: 1.35rem; }
+:is(.vertical-camera article, .inline-details) li + li { margin-top: 1rem; }
+:is(.vertical-camera article, .inline-details) img { max-height: 420px; object-fit: contain; }
+:is(.vertical-camera article, .inline-details) #publications { scroll-margin-top: 1rem; }
 .scholarship-year { margin-block: 1.25rem 1.75rem; }
 .scholarship-year-label { margin: 0 0 .55rem; color: var(--accent); font: 600 .875rem/1.4 ui-monospace, Consolas, monospace; }
 .scholarship-year .scholarship-list { display: grid; gap: .7rem; list-style: none; margin: 0; padding: 0; }
@@ -366,13 +366,21 @@ figcaption { color: var(--muted); font-size: .875rem; margin-top: .75rem; }
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
-  .stage .composition { margin-block: auto; }
+  .stage .composition { align-content: center; min-height: max(0px, calc(100svh - var(--header-height) - 150px)); }
   .stage .scene > .detail-toggle {
     position: static;
     translate: none;
     flex: none;
     height: 44px;
     margin: .55rem auto 0;
+  }
+  .inline-details {
+    flex: none;
+    min-width: 0;
+    margin-top: .8rem;
+    padding-top: 1.35rem;
+    border-top: 1px solid var(--line);
+    overflow-wrap: anywhere;
   }
   .swipe-hint { display: block; margin: 0; padding: .45rem .75rem; text-align: center; font-size: .75rem; color: var(--muted); }
   @media (prefers-reduced-motion: no-preference) {
