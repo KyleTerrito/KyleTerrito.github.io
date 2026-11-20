@@ -3,7 +3,6 @@ const panelContent = panel.querySelector('.panel-content');
 const detailArticles = [...panelContent.querySelectorAll('[data-scene]')];
 const closePanel = panel.querySelector('.close-panel');
 const verticalCamera = panel.querySelector('.vertical-camera');
-const verticalMotion = matchMedia('(prefers-reduced-motion: no-preference)');
 let opener;
 let sharedScene;
 let detailArticle;
@@ -14,8 +13,18 @@ let ignoreUpwardWheelUntil = 0;
 
 function layoutVertical() {
   if (!panel.open || !detailArticle) return;
+  panel.classList.toggle('static-details', !motion.matches);
+  if (!motion.matches) {
+    transitionHeight = 0;
+    restoreScene();
+    detailArticle.style.removeProperty('transform');
+    detailArticle.style.removeProperty('visibility');
+    detailArticle.inert = false;
+    return;
+  }
+  moveScene(detailArticle.dataset.scene);
   const height = panelContent.clientHeight;
-  transitionHeight = verticalMotion.matches ? Math.round(height * 1.35) : 0;
+  transitionHeight = Math.round(height * 1.35);
   panelContent.style.setProperty('--reading-height', height + 'px');
   panelContent.style.setProperty('--reading-center', height / 2 + 'px');
   panelContent.style.setProperty('--transition-height', transitionHeight + 'px');
@@ -41,7 +50,7 @@ function updateVerticalZoom() {
 function matchSharedFrame(scene) {
   const bounds = scene.getBoundingClientRect();
   const headerHeight = document.querySelector('.bar').offsetHeight;
-  if (!verticalMotion.matches) return;
+  if (!motion.matches) return;
   if (bounds.top < headerHeight - 1 || bounds.bottom > innerHeight + 1) return;
   if (motion.matches && !scene.classList.contains('reading-view')) return;
   panel.style.setProperty('--card-top', bounds.top + 'px');
@@ -87,6 +96,7 @@ function moveScene(id) {
   element.replaceWith(placeholder);
   verticalCamera.prepend(element);
   element.inert = false;
+  element.querySelector('.detail-toggle').setAttribute('aria-label', 'Close details');
   sharedScene = { element, placeholder };
 }
 
@@ -108,7 +118,6 @@ function showDetail(target) {
     panel.showModal();
     document.documentElement.classList.add('panel-open');
   }
-  moveScene(article.dataset.scene);
   layoutVertical();
   panelContent.scrollTop = target === article
     ? 0
@@ -116,9 +125,8 @@ function showDetail(target) {
   leftTop = panelContent.scrollTop > 12;
   dismissing = false;
   updateVerticalZoom();
-  const sharedToggle = sharedScene.element.querySelector('.detail-toggle');
-  sharedToggle.setAttribute('aria-label', 'Close details');
-  const focusTarget = target !== article ? target : transitionHeight ? sharedToggle : heading;
+  const sharedToggle = sharedScene?.element.querySelector('.detail-toggle');
+  const focusTarget = target !== article ? target : sharedToggle || heading;
   focusTarget.focus({ preventScroll: true });
   return true;
 }
@@ -177,7 +185,7 @@ panelContent.addEventListener('scroll', onVerticalScroll, { passive: true });
 window.addEventListener('wheel', event => {
   if (!panel.open && !event.ctrlKey && event.deltaY < 0 && performance.now() < ignoreUpwardWheelUntil) event.preventDefault();
 }, { passive: false });
-verticalMotion.addEventListener('change', layoutVertical);
+motion.addEventListener('change', layoutVertical);
 window.addEventListener('resize', () => {
   clearSharedFrame();
   layoutVertical();

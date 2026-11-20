@@ -262,8 +262,34 @@ figcaption { color: var(--muted); font-size: .875rem; margin-top: .75rem; }
   min-height: 0;
   transform-origin: center;
 }
-.detail-panel:not(.reading-details) .panel-bar,
+.detail-panel:not(.reading-details, .static-details) .panel-bar,
 .detail-panel:not(.reading-details) .vertical-progress { visibility: hidden; }
+.detail-panel.static-details {
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  background: var(--paper);
+}
+.static-details .panel-bar {
+  position: relative;
+  inset: auto;
+  align-self: stretch;
+  display: flex;
+  justify-content: flex-end;
+  padding: max(.65rem, env(safe-area-inset-top)) 1rem .65rem;
+  border-bottom: 1px solid var(--line);
+  visibility: visible;
+}
+.static-details .panel-content { scrollbar-width: auto; }
+.static-details .vertical-progress, .static-details .vertical-tail { display: none; }
+.static-details .vertical-stage, .static-details .vertical-camera { position: static; height: auto; }
+.static-details .vertical-camera article {
+  position: relative;
+  min-height: 0;
+  border: 0;
+  background: none;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+}
 .vertical-camera article {
   position: absolute;
   inset: 0 0 auto;
