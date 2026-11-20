@@ -1,0 +1,141 @@
+const root = document.documentElement;
+const stage = document.querySelector('.stage');
+const camera = document.querySelector('.camera');
+const scenes = [...document.querySelectorAll('.scene')];
+const links = [...document.querySelectorAll('.section-nav a')];
+const track = document.querySelector('.track');
+const signal = document.querySelector('.signal');
+const motion = matchMedia('(min-width: 761px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)');
+const restoringHistory = performance.getEntriesByType('navigation')[0]?.type === 'back_forward';
+let frame = 0;
+
+function ease(value) {
+  const t = Math.min(1, Math.max(0, value));
+  return t * t * (3 - 2 * t);
+}
+
+function transitionAt(phase, depth) {
+  const pullback = ease((phase - .14) / .24);
+  const travel = ease((phase - .38) / .24);
+  const approach = ease((phase - .62) / .24);
+  return { travel, scale: 1 - depth * (pullback - approach) };
+}
+
+function scrollRange() {
+  return stage.offsetHeight - camera.offsetHeight;
+}
+
+function drawSignal() {
+  const { clientWidth: width, clientHeight: height } = signal;
+  const density = Math.min(devicePixelRatio || 1, 2);
+  signal.width = width * density;
+  signal.height = height * density;
+  const context = signal.getContext('2d');
+  if (!context) return;
+  context.scale(density, density);
+  const baseline = height * .64;
+  const fade = context.createLinearGradient(0, 0, width, 0);
+  fade.addColorStop(0, '#75e1ee00');
+  fade.addColorStop(.25, '#75e1ee');
+  fade.addColorStop(.78, '#75e1ee');
+  fade.addColorStop(1, '#75e1ee00');
+  context.strokeStyle = fade;
+  context.lineWidth = 1.5;
+  context.beginPath();
+  for (let x = 0; x <= width; x += 2) {
+    const t = x / width;
+    const envelope = Math.exp(-18 * (t - .55) ** 2);
+    const y = baseline + Math.sin(t * 48) * envelope * Math.min(height * .11, 76);
+    if (x === 0) context.moveTo(x, y);
+    else context.lineTo(x, y);
+  }
+  context.stroke();
+}
+
+function render() {
+  frame = 0;
+  if (root.classList.contains('panel-open')) return;
+  if (!motion.matches) {
+    const current = scenes.findLastIndex(scene => scene.getBoundingClientRect().top <= stage.offsetTop + 24);
+    links.forEach((link, index) => {
+      if (index === Math.max(0, current)) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    return;
+  }
+
+  const last = scenes.length - 1;
+  const traveled = stage.offsetTop - stage.getBoundingClientRect().top;
+  const progress = Math.min(last, Math.max(0, traveled / scrollRange() * last));
+  const from = Math.min(last - 1, Math.floor(progress));
+  const phase = progress - from;
+  const { travel, scale } = transitionAt(phase, from === 0 ? .29 : .21);
+  const active = from + Math.round(travel);
+  track.style.setProperty('--progress', `${progress / last * 100}%`);
+  root.style.setProperty('--grid-x', `${-progress * 29}px`);
+  root.style.setProperty('--grid-y', `${progress * 16}px`);
+  root.style.setProperty('--signal-opacity', `${.25 + (1 - scale) * 1.65}`);
+
+  scenes.forEach((scene, index) => {
+    const distance = index - from - travel;
+    const visible = index === active || (scale < 1 && (index === from || index === from + 1));
+    scene.style.visibility = visible ? 'visible' : 'hidden';
+    scene.style.transform = visible
+      ? `translateX(calc(${distance * scale * 100}% + ${distance * 24}px)) scale(${scale})`
+      : '';
+    scene.inert = index !== active;
+    scene.classList.toggle('reading-view', index === active && scale === 1);
+    if (index === active) links[index].setAttribute('aria-current', 'location');
+    else links[index].removeAttribute('aria-current');
+  });
+}
+
+function scheduleRender() {
+  if (!frame) frame = requestAnimationFrame(render);
+}
+
+function jump(hash, behavior) {
+  const sceneHash = hash === '#contact' ? '#about' : hash;
+  const index = scenes.findIndex(scene => '#' + scene.id === sceneHash);
+  if (index < 0) return;
+  window.scrollTo({ top: scrollRange() * index / (scenes.length - 1), behavior });
+  scheduleRender();
+}
+
+function syncMotion() {
+  root.classList.toggle('enhanced', motion.matches);
+  if (!motion.matches) {
+    ['--grid-x', '--grid-y', '--signal-opacity'].forEach(property => root.style.removeProperty(property));
+    scenes.forEach(scene => {
+      scene.inert = false;
+      scene.style.removeProperty('visibility');
+      scene.style.removeProperty('transform');
+    });
+  }
+  render();
+}
+
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href^="#"]');
+  if (!link || link.hasAttribute('data-detail') || !motion.matches || event.button !== 0 ||
+      event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  if (location.hash !== link.hash) history.pushState(null, '', link.hash);
+  jump(link.hash, link.classList.contains('skip') ? 'instant' : 'smooth');
+  if (link.classList.contains('skip')) {
+    render();
+    document.querySelector(link.hash).focus({ preventScroll: true });
+  }
+});
+window.addEventListener('pageshow', event => {
+  if (!event.persisted && !restoringHistory && motion.matches && location.hash) jump(location.hash, 'instant');
+  scheduleRender();
+});
+window.addEventListener('scroll', scheduleRender, { passive: true });
+window.addEventListener('resize', () => {
+  drawSignal();
+  scheduleRender();
+});
+motion.addEventListener('change', syncMotion);
+drawSignal();
+syncMotion();

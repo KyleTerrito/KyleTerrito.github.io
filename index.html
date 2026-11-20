@@ -1,56 +1,403 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#07111f" />
-    <meta name="description" content="A draggable board featuring all 32 NFL team logos." />
-    <title>NFL Futures Board</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <nav class="page-nav" aria-label="Main navigation">
-      <a class="nav-link active" href="index.html" aria-current="page">Logo board</a>
-      <a class="nav-link" href="divisions.html">Division winners</a>
-      <a class="nav-link" href="conferences.html">Conference winners</a>
-      <a class="nav-link" href="wins.html">Season wins</a>
-      <a class="nav-link" href="schedule.html">Schedule &amp; picks</a>
-      <a class="nav-link" href="sos.html">Schedule strength</a>
-      <a class="nav-link" href="summary.html">Summary</a>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kyle Territo, chemical engineering PhD researcher at LSU. Research, software, and experience in process monitoring and control.">
+  <title>Kyle Territo · Chemical Engineering</title>
+  <link rel="stylesheet" href="assets/portfolio/styles.css">
+  <script src="assets/portfolio/motion.js" defer></script>
+  <script src="assets/portfolio/details.js" defer></script>
+</head>
+<body>
+  <div class="drafting-grid" aria-hidden="true"><canvas class="signal"></canvas></div>
+  <a class="skip" href="#about">Skip to content</a>
+  <header class="bar">
+    <a class="brand" href="#about">Kyle Territo</a>
+    <nav class="section-nav" aria-label="Overview sections">
+      <a href="#about">About</a>
+      <a href="#experience" aria-label="Education and Experience">Background</a>
+      <a href="#research" aria-label="Research Interests">Research</a>
+      <a href="#software">Software</a>
+      <a href="#scholarship" aria-label="Publications and Presentations">Papers &amp; Talks</a>
+      <span class="track" aria-hidden="true"></span>
     </nav>
-    <header class="site-header">
-      <div>
-        <p class="eyebrow">NFL FUTURES</p>
-        <h1>Build your board.</h1>
-        <p class="subtitle">Drag every team wherever you think they belong.</p>
-      </div>
-      <button id="reset-button" class="reset-button" type="button">Reset board</button>
-    </header>
-
-    <main>
-      <section class="board-shell" aria-labelledby="board-title">
-        <div class="board-heading">
-          <h2 id="board-title">All 32 teams</h2>
-          <p><span class="status-dot"></span> Positions save on this device</p>
+  </header>
+  <main class="stage">
+    <div class="camera">
+      <section class="scene about" id="about" aria-labelledby="about-title" tabindex="-1">
+        <div class="composition">
+          <div>
+            <p class="label">About</p>
+            <div class="about-identity">
+              <figure class="portrait"><img src="assets/IMG_9887.JPG" width="2160" height="2700" alt="Portrait of Kyle Territo"></figure>
+              <h1 id="about-title">Kyle<br>Territo</h1>
+            </div>
+            <p class="intro">I’m Kyle. I’m a chemical engineering PhD student at LSU, and I ran a lawn care business while I was in school.</p>
+          </div>
+          <section class="about-contact" id="contact" aria-labelledby="contact-title">
+            <h2 id="contact-title">How to contact me</h2>
+            <p>If you’d like to talk about my research, ask about one of my software projects, or just say hello, I’d be happy to hear from you. Email is the best way to reach me.</p>
+            <div class="contact-links">
+              <a class="contact-tile" href="mailto:kyleterrito0713@gmail.com">
+                <span class="contact-icon utility-mark" aria-hidden="true"><span class="envelope"></span></span>
+                <span class="contact-name">Email</span>
+                <span class="contact-destination">kyleterrito0713@gmail.com</span>
+              </a>
+              <a class="contact-tile" href="tel:+12253806023">
+                <span class="contact-icon utility-mark" aria-hidden="true"><span class="phone-mark"></span></span>
+                <span class="contact-name">Phone</span>
+                <span class="contact-destination">(225) 380-6023</span>
+              </a>
+              <a class="contact-tile" href="https://www.linkedin.com/in/kyle-territo/">
+                <span class="contact-icon linkedin-mark" aria-hidden="true">in</span>
+                <span class="contact-name">LinkedIn</span>
+                <span class="contact-destination">Kyle Territo</span>
+              </a>
+              <a class="contact-tile" href="https://www.instagram.com/kyleterrito/">
+                <span class="contact-icon instagram-mark" aria-hidden="true"></span>
+                <span class="contact-name">Instagram</span>
+                <span class="contact-destination">@kyleterrito</span>
+              </a>
+              <a class="contact-tile" href="https://github.com/KyleTerrito">
+                <span class="contact-icon github-mark" aria-hidden="true"><img src="assets/github-invertocat-white.png" width="24" height="24" alt=""></span>
+                <span class="contact-name">GitHub</span>
+                <span class="contact-destination">@KyleTerrito</span>
+              </a>
+              <a class="contact-tile" href="https://orcid.org/0009-0002-1133-915X">
+                <span class="contact-icon orcid-mark" aria-hidden="true">iD</span>
+                <span class="contact-name">ORCID</span>
+                <span class="contact-destination">0009-0002-1133-915X</span>
+              </a>
+            </div>
+          </section>
         </div>
-        <div id="team-board" class="team-board" aria-label="Draggable NFL team tier board">
-          <div class="tier-zone tier-s" aria-hidden="true"><span>S</span><small>ELITE</small></div>
-          <div class="tier-zone tier-a" aria-hidden="true"><span>A</span><small>CONTENDERS</small></div>
-          <div class="tier-zone tier-b" aria-hidden="true"><span>B</span><small>PLAYOFF</small></div>
-          <div class="tier-zone tier-c" aria-hidden="true"><span>C</span><small>MIDDLE</small></div>
-          <div class="tier-zone tier-d" aria-hidden="true"><span>D</span><small>REBUILD</small></div>
-          <div class="unranked-zone" aria-hidden="true"><span>UNRANKED</span><small>Drag teams into a tier</small></div>
-        </div>
+        <a class="detail-toggle" href="details/about.html" data-detail="about-details" aria-label="Open About details" title="Open About details"><span class="chevron" aria-hidden="true"></span></a>
       </section>
-    </main>
-
-    <template id="team-template">
-      <button class="team-card" type="button">
-        <span class="logo-wrap"><img class="team-logo" alt="" draggable="false" /></span>
-        <span class="team-name"></span>
-      </button>
-    </template>
-
-    <script src="app.js"></script>
-  </body>
+      <section class="scene experience" id="experience" aria-labelledby="experience-title">
+        <div class="composition">
+          <div>
+            <p class="label">Education &amp; Experience</p>
+            <h2 id="experience-title">From LSU to industry research.</h2>
+          </div>
+          <dl class="experience-list">
+            <div><dt>Industrial process research</dt><dd>LSU research in collaboration with ExxonMobil</dd></div>
+            <div><dt>Chemical engineering</dt><dd>Bachelor’s degree and ongoing PhD study at LSU</dd></div>
+            <div><dt>Business ownership</dt><dd>Operated a lawn care and landscaping business</dd></div>
+          </dl>
+        </div>
+        <a class="detail-toggle" href="details/experience.html" data-detail="experience-details" aria-label="Open Education and Experience details" title="Open Experience details"><span class="chevron" aria-hidden="true"></span></a>
+      </section>
+      <section class="scene research" id="research" aria-labelledby="research-title">
+        <div class="composition">
+          <div>
+            <p class="label">Research Interests</p>
+            <h2 id="research-title">Making sense of process data.</h2>
+            <p class="intro">I work on methods for comparing industrial time series, detecting abnormal behavior, and tuning process controllers.</p>
+          </div>
+          <dl class="experience-list">
+            <div><dt>Process monitoring</dt><dd>How can we recognize when a process starts behaving differently?</dd></div>
+            <div><dt>Time-series analysis</dt><dd>How can we compare similar patterns that unfold at different speeds?</dd></div>
+            <div><dt>Process control</dt><dd>How can data help us tune a controller?</dd></div>
+          </dl>
+        </div>
+        <a class="detail-toggle" href="details/research.html" data-detail="research-details" aria-label="Open Research details" title="Open Research details"><span class="chevron" aria-hidden="true"></span></a>
+      </section>
+      <section class="scene software" id="software" aria-labelledby="software-title">
+        <div class="composition">
+          <div>
+            <p class="label">Software</p>
+            <h2 id="software-title">Tools for working with process data.</h2>
+            <p class="intro">My projects turn methods for exploring data, detecting faults, and tuning controllers into tools people can use.</p>
+          </div>
+          <figure class="feature project"><img src="assets/software/warp-map-6.png" alt="Warp Map software preview"><figcaption>Warp Map · Time-series visualization</figcaption></figure>
+        </div>
+        <a class="detail-toggle" href="details/software.html" data-detail="software-details" aria-label="Open Software details" title="Open Software details"><span class="chevron" aria-hidden="true"></span></a>
+      </section>
+      <section class="scene research" id="scholarship" aria-labelledby="scholarship-title">
+        <div class="composition">
+          <div>
+            <h2 id="scholarship-title">Papers &amp; Talks</h2>
+            <p class="intro papers-summary">I’ve had the privilege of collaborating with many people on my research. One highlight was seeing our paper, <a href="https://doi.org/10.1021/acs.iecr.5c05160"><strong>Graph-Based, Time-Warped Embedding for Time Series Analysis and Process Monitoring</strong></a>, featured on the front cover of <em>Industrial &amp; Engineering Chemistry Research</em>.</p>
+            <p class="intro papers-summary conference-summary">I’ve presented my research at <strong><span class="conference-count">7</span> conferences</strong>, <strong><span class="conference-count">4</span> of them international</strong>. I also had the opportunity to serve as a session chair at the iCHEAP conference in Florence, Italy in summer of 2025.</p>
+          </div>
+          <figure class="feature cover">
+            <img src="assets/iecred.2026.65.issue-8.xlargecover.jpg" alt="Front cover of Industrial &amp; Engineering Chemistry Research, volume 65, issue 8">
+            <figcaption><a class="cover-credit" href="https://doi.org/10.1021/acs.iecr.5c05160">Featured on the I&amp;EC Research front cover</a></figcaption>
+          </figure>
+        </div>
+        <a class="detail-toggle" href="details/research.html#publications" data-detail="scholarship-details" aria-label="Open Publications and Presentations details" title="Open Publications and Presentations details"><span class="chevron" aria-hidden="true"></span></a>
+      </section>
+    </div>
+  </main>
+  <dialog class="detail-panel" aria-labelledby="about-detail-title">
+    <div class="panel-bar">
+      <button type="button" class="button detail-toggle close-panel" aria-label="Close details" title="Close details" autofocus>Close details <span class="chevron" aria-hidden="true"></span></button>
+    </div>
+    <div class="vertical-progress" aria-hidden="true"></div>
+    <div class="panel-content" tabindex="0" aria-label="Scroll to read details">
+      <div class="vertical-stage"><div class="vertical-camera">
+      <article id="about-details" data-scene="about" hidden>
+    <h2 id="about-detail-title" data-detail-heading tabindex="-1">About me</h2>
+    <p class="intro">I’m Kyle Territo, a chemical engineering PhD student at Louisiana State University.</p>
+    <p>I ran a lawn care and landscaping business while I was in school. Working with customers and making the day-to-day decisions taught me to take responsibility for the results of my work.</p>
+    <p><a href="details/experience.html" data-detail="experience-details">See my education and experience</a></p>
+        </article>
+      <article id="research-details" data-scene="research" hidden>
+    <h2 id="research-detail-title" data-detail-heading tabindex="-1">Research</h2>
+    <p class="intro">My work spans time-series analysis, fault detection, and data-driven process control.</p>
+    <h3>Time-series alignment</h3>
+    <p>Industrial processes can exhibit similar patterns at different speeds. My work with J. A. Romagnoli explores graph-based time-warped embeddings to compare those patterns for process monitoring.</p>
+    <h3>Fault diagnosis</h3>
+    <p>I’m interested in recognizing when a process shifts away from normal operation and using data to help identify possible causes.</p>
+    <h3>Process control</h3>
+    <p>I study data-driven approaches to tuning PID controllers.</p>
+    <p><a href="details/research.html#publications" data-detail="publications">See related publications</a></p>
+        </article>
+      <article id="software-details" data-scene="software" hidden>
+    <h2 id="software-detail-title" data-detail-heading tabindex="-1">Software</h2>
+    <h3>Warp Map</h3>
+    <p>A visual tool for exploring time-series alignment.</p>
+    <img src="assets/software/warp-map-6.png" alt="Warp Map software preview">
+    <h3>GeauxTune</h3>
+    <p>A software project focused on controller tuning.</p>
+    <img src="assets/software/geaux-tune-4.png" alt="GeauxTune software preview" loading="lazy">
+    <h3>FASTMAN-JMP</h3>
+    <p>A JMP tool for data exploration, model building, and fault detection analysis.</p>
+        </article>
+      <article id="experience-details" data-scene="experience" hidden>
+    <h2 id="experience-detail-title" data-detail-heading tabindex="-1">Education &amp; Experience</h2>
+    <section class="resume-section resume-section--with-photo" aria-labelledby="education-title">
+      <h3 class="resume-section-title" id="education-title">Education</h3>
+      <ul class="resume-entries" role="list">
+        <li class="resume-entry">
+          <div class="resume-identity">
+            <img class="resume-logo resume-logo--lsu" src="assets/experience/lsu-primary-logo.png" alt="">
+            <div>
+              <h4 class="resume-role">Doctor of Philosophy in Chemical Engineering</h4>
+              <p>Minor in Computer Science</p>
+              <p class="resume-organization">Louisiana State University (LSU) · Baton Rouge, LA</p>
+            </div>
+          </div>
+          <p class="resume-date">Spring 2023 – Spring 2027 (expected)</p>
+        </li>
+        <li class="resume-entry">
+          <div class="resume-identity">
+            <img class="resume-logo resume-logo--lsu" src="assets/experience/lsu-primary-logo.png" alt="">
+            <div>
+              <h4 class="resume-role">Bachelor of Science in Chemical Engineering</h4>
+              <p class="resume-organization">Louisiana State University (LSU) · Baton Rouge, LA</p>
+            </div>
+          </div>
+          <p class="resume-date">Fall 2018 – Fall 2022</p>
+        </li>
+      </ul>
+      <figure class="resume-photo">
+        <img src="assets/IMG_0373.JPG" width="2048" height="1536" alt="Kyle Territo at his LSU bachelor’s graduation" loading="lazy">
+        <figcaption>LSU bachelor’s graduation · Fall 2022</figcaption>
+      </figure>
+    </section>
+    <section class="resume-section" aria-labelledby="research-experience-title">
+      <h3 class="resume-section-title" id="research-experience-title">Research Experience</h3>
+      <ul class="resume-entries" role="list">
+        <li class="resume-entry">
+          <div>
+            <h4 class="resume-role">Graduate Researcher</h4>
+            <p class="resume-organization">Louisiana State University · Baton Rouge, LA</p>
+          </div>
+          <p class="resume-date">Spring 2023 – Present</p>
+          <div class="resume-partners">
+            <img class="resume-logo" src="assets/experience/PSE-logo-9.png" alt="Process Systems Engineering Research Group at LSU">
+            <img class="resume-logo" src="assets/experience/exxon.jpg" alt="ExxonMobil">
+          </div>
+          <ul class="resume-duties">
+            <li>Conduct industrial process research under Prof. José Romagnoli in collaboration with researchers at ExxonMobil.</li>
+            <li>Develop data-driven methods for time-series analysis, process monitoring, and fault diagnosis.</li>
+            <li>Study approaches to PID controller tuning and build software for working with process data.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section class="resume-section" aria-labelledby="work-experience-title">
+      <h3 class="resume-section-title" id="work-experience-title">Work Experience</h3>
+      <ul class="resume-entries" role="list">
+        <li class="resume-entry">
+          <div>
+            <h4 class="resume-role">Owner &amp; Operator</h4>
+            <p class="resume-organization">Lawn Care and Landscaping Business</p>
+          </div>
+          <p class="resume-date">Through Summer 2025</p>
+          <ul class="resume-duties">
+            <li>Started the business in high school and continued operating it during my PhD.</li>
+            <li>Worked directly with clients, scheduled jobs, and handled business finances.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+        </article>
+      <article id="scholarship-details" data-scene="scholarship" hidden>
+    <h2 id="scholarship-detail-title" data-detail-heading tabindex="-1">Papers &amp; Talks</h2>
+    <h3 id="publications" tabindex="-1">Publications</h3>
+    <section class="scholarship-year" aria-label="2026">
+      <p class="scholarship-year-label">2026</p>
+      <ul class="scholarship-list" role="list">
+        <li class="scholarship-card">
+          <h4>Graph-Based, Time-Warped Embedding for Time Series Analysis and Process Monitoring</h4>
+          <p><strong class="publication-author">Territo, K.</strong>, &amp; Romagnoli, J. A.</p>
+          <p><cite>Industrial &amp; Engineering Chemistry Research</cite>, 65(8), 4568–4581.</p>
+          <a class="publication-link" href="https://doi.org/10.1021/acs.iecr.5c05160">DOI: 10.1021/acs.iecr.5c05160</a>
+        </li>
+        <li class="scholarship-card">
+          <h4>A Unified, Graph-Based Framework for Timeseries Process Clustering, Adaptive Process Monitoring, and LLM-Assisted Fault Diagnosis</h4>
+          <p><strong class="publication-author">Territo, K.</strong>, &amp; Romagnoli, J. A.</p>
+          <p><cite>AIChE Spring Meeting and 22nd Global Congress on Process Safety</cite>.</p>
+          <a class="publication-link" href="https://proceedings.aiche.org/conferences/aiche-spring-meeting-and-global-congress-process-safety/2026/proceeding-689">AIChE proceedings</a>
+        </li>
+        <li class="scholarship-card">
+          <h4>Connecting the Dots: A Graph-Based Approach for Unsupervised Learning and Adaptive Process Monitoring with LLM-Assisted Fault Diagnosis</h4>
+          <p><strong class="publication-author">Territo, K.</strong>, &amp; Romagnoli, J. A.</p>
+          <p><cite>Systems and Control Transactions</cite>, 5, 2473–2480.</p>
+          <a class="publication-link" href="https://doi.org/10.69997/sct.104309">DOI: 10.69997/sct.104309</a>
+        </li>
+        <li class="scholarship-card">
+          <h4>Intelligent Temporal Synchronization Enhanced Cointegration Framework for Non-Stationary Industrial Process Monitoring</h4>
+          <p>Rao, J., Ji, C., <strong class="publication-author">Territo, K.</strong>, Wang, J., Sun, W., &amp; Romagnoli, J. A.</p>
+          <p><cite>Process Safety and Environmental Protection</cite>, 108410.</p>
+          <a class="publication-link" href="https://doi.org/10.1016/j.psep.2026.108410">DOI: 10.1016/j.psep.2026.108410</a>
+        </li>
+        <li class="scholarship-card">
+          <h4>Toward Harnessing AI for Surfactant Chemistry: Prediction of Critical Micelle Concentration</h4>
+          <p>Marchan, G. T., Balogun, T. O., <strong class="publication-author">Territo, K.</strong>, Das, R., Olayiwola, T., Kumar, R., &amp; Romagnoli, J. A.</p>
+          <p><cite>Computational Materials Science</cite>, 265, 114548.</p>
+          <a class="publication-link" href="https://doi.org/10.1016/j.commatsci.2026.114548">DOI: 10.1016/j.commatsci.2026.114548</a>
+        </li>
+        <li class="scholarship-card">
+          <h4>Semi-Supervised Generative Augmentation Improves Surfactant Surface Tension Prediction from Limited Experimental Data</h4>
+          <p>Marchan, G. C. T., <strong class="publication-author">Territo, K.</strong>, &amp; Romagnoli, J. A.</p>
+          <p><cite>Systems and Control Transactions</cite>, 5, 1111–1118.</p>
+          <a class="publication-link" href="https://doi.org/10.69997/sct.100178">DOI: 10.69997/sct.100178</a>
+        </li>
+      </ul>
+    </section>
+    <section class="scholarship-year" aria-label="2025">
+      <p class="scholarship-year-label">2025</p>
+      <ul class="scholarship-list" role="list">
+        <li class="scholarship-card">
+          <h4>Autonomous PID Tuning for Industrial Process Control: A Surrogate Model and Agent-Based Approach</h4>
+          <p><strong class="publication-author">Territo, K.</strong>, &amp; Romagnoli, J. A.</p>
+          <p><cite>AIChE Spring Meeting and Global Congress on Process Safety</cite>.</p>
+          <a class="publication-link" href="https://proceedings.aiche.org/conferences/aiche-spring-meeting-and-global-congress-process-safety/2025/proceeding-726">AIChE proceedings</a>
+        </li>
+        <li class="scholarship-card">
+          <h4>Towards Self-Tuning PID Controllers: A Data-Driven, Reinforcement Learning Approach for Industrial Automation</h4>
+          <p><strong class="publication-author">Territo, K.</strong>, Vallet, P., &amp; Romagnoli, J. A.</p>
+          <p><cite>Systems and Control Transactions</cite>, 4, 1843–1848.</p>
+          <a class="publication-link" href="https://doi.org/10.69997/sct.132857">DOI: 10.69997/sct.132857</a>
+        </li>
+        <li class="scholarship-card">
+          <h4>Physics-Informed Data-Driven Control of Electrochemical Separation Processes</h4>
+          <p>Olayiwola, T., <strong class="publication-author">Territo, K.</strong>, &amp; Romagnoli, J.</p>
+          <p><cite>Systems and Control Transactions</cite>, 1908–1914.</p>
+          <a class="publication-link" href="https://doi.org/10.69997/sct.163984">DOI: 10.69997/sct.163984</a>
+        </li>
+      </ul>
+    </section>
+    <section class="scholarship-year" aria-label="2024">
+      <p class="scholarship-year-label">2024</p>
+      <ul class="scholarship-list" role="list">
+        <li class="scholarship-card">
+          <h4>JMP-FASTMAN: All-in-One Tool for Data Exploration and Fault Detection Analysis</h4>
+          <p><strong class="publication-author">Territo, K.</strong>, &amp; Romagnoli, J. A.</p>
+          <p><cite>AIChE Spring Meeting and Global Congress on Process Safety</cite>.</p>
+          <a class="publication-link" href="https://proceedings.aiche.org/conferences/aiche-spring-meeting-and-global-congress-on-process-safety/2024/proceeding/paper/56b-jmp-fastman-all-one-tool-data-exploration-and-fault-detection-analysis">AIChE proceedings</a>
+        </li>
+        <li class="scholarship-card">
+          <h4>FASTMAN-JMP: All-in-One Tool for Data Mining and Model Building</h4>
+          <p><strong class="publication-author">Territo, K.</strong>, &amp; Romagnoli, J. A.</p>
+          <p><cite>Computer Aided Chemical Engineering</cite>, 53, 3421–3426.</p>
+          <a class="publication-link" href="https://doi.org/10.1016/B978-0-443-28824-1.50571-8">DOI: 10.1016/B978-0-443-28824-1.50571-8</a>
+        </li>
+      </ul>
+    </section>
+    <h3 id="presentations" tabindex="-1">Presentations</h3>
+    <section class="scholarship-year" aria-label="2026">
+      <p class="scholarship-year-label">2026</p>
+      <ul class="scholarship-list" role="list">
+        <li class="scholarship-card">
+          <h4><a href="https://www.aiche.org/conferences/aiche-spring-meeting-and-global-congress-on-process-safety/2026">AIChE Spring Meeting</a></h4>
+          <p>Houston, Texas, USA · April 12–16, 2026</p>
+          <p class="related-talk-label">Related papers:</p>
+          <ul class="related-talk-papers">
+            <li><a href="https://proceedings.aiche.org/conferences/aiche-spring-meeting-and-global-congress-process-safety/2026/proceeding-689">A Unified, Graph-Based Framework for Timeseries Process Clustering, Adaptive Process Monitoring, and LLM-Assisted Fault Diagnosis</a> <span class="talk-tag talk-tag--session">Session</span></li>
+          </ul>
+        </li>
+        <li class="scholarship-card">
+          <h4><a href="https://www.escape36.co.uk/">ESCAPE 36</a></h4>
+          <p>Sheffield, UK · June 21–24, 2026</p>
+          <p class="related-talk-label">Related papers:</p>
+          <ul class="related-talk-papers">
+            <li><a href="https://doi.org/10.69997/sct.104309">Connecting the Dots: A Graph-Based Approach for Unsupervised Learning and Adaptive Process Monitoring with LLM-Assisted Fault Diagnosis</a> <span class="talk-tag talk-tag--oral">Oral session</span></li>
+            <li><a href="https://doi.org/10.69997/sct.100178">Semi-Supervised Generative Augmentation Improves Surfactant Surface Tension Prediction from Limited Experimental Data</a> <span class="talk-tag talk-tag--poster">Poster</span></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section class="scholarship-year" aria-label="2025">
+      <p class="scholarship-year-label">2025</p>
+      <ul class="scholarship-list" role="list">
+        <li class="scholarship-card">
+          <h4><a href="https://www.aiche.org/conferences/aiche-spring-meeting-and-global-congress-on-process-safety/2025">AIChE Spring Meeting</a></h4>
+          <p>Dallas, Texas, USA · April 6–10, 2025</p>
+          <p class="related-talk-label">Related papers:</p>
+          <ul class="related-talk-papers">
+            <li><a href="https://proceedings.aiche.org/conferences/aiche-spring-meeting-and-global-congress-process-safety/2025/proceeding-726">Autonomous PID Tuning for Industrial Process Control: A Surrogate Model and Agent-Based Approach</a> <span class="talk-tag talk-tag--poster">Poster</span></li>
+          </ul>
+        </li>
+        <li class="scholarship-card">
+          <h4><a href="https://www.aidic.it/icheap17/">ICHEAP 17</a></h4>
+          <p>Florence, Italy · June 29–July 2, 2025</p>
+          <p class="related-talk-label">Related papers:</p>
+          <ul class="related-talk-papers">
+            <li><a href="https://www.aidic.it/icheap17/programma/pro.html">VAE-Assisted Data Augmentation for Improved Molecular Prediction with Graph Neural Networks (GNNs) in Low-Data Regimes</a> <span class="talk-tag talk-tag--oral">Oral session</span><br><small>Presented on behalf of the authors</small></li>
+          </ul>
+          <div class="talk-tags"><a href="https://www.aidic.it/icheap17/programma/pro.html">Process Systems Engineering and Digitalization</a> <span class="talk-tag talk-tag--chair">Session chair</span></div>
+        </li>
+        <li class="scholarship-card">
+          <h4><a href="https://escape35-belgium.eu/">ESCAPE 35</a></h4>
+          <p>Ghent, Belgium · July 6–9, 2025</p>
+          <p class="related-talk-label">Related papers:</p>
+          <ul class="related-talk-papers">
+            <li><a href="https://doi.org/10.69997/sct.132857">Towards Self-Tuning PID Controllers: A Data-Driven, Reinforcement Learning Approach for Industrial Automation</a> <span class="talk-tag talk-tag--poster">Poster</span></li>
+            <li><a href="https://doi.org/10.69997/sct.163984">Physics-Informed Data-Driven Control of Electrochemical Separation Processes</a> <span class="talk-tag talk-tag--oral">Oral session</span></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section class="scholarship-year" aria-label="2024">
+      <p class="scholarship-year-label">2024</p>
+      <ul class="scholarship-list" role="list">
+        <li class="scholarship-card">
+          <h4><a href="https://www.aiche.org/conferences/aiche-spring-meeting-and-global-congress-on-process-safety/2024">AIChE Spring Meeting</a></h4>
+          <p>New Orleans, Louisiana, USA · March 24–28, 2024</p>
+          <p class="related-talk-label">Related papers:</p>
+          <ul class="related-talk-papers">
+            <li><a href="https://proceedings.aiche.org/conferences/aiche-spring-meeting-and-global-congress-on-process-safety/2024/proceeding/paper/56b-jmp-fastman-all-one-tool-data-exploration-and-fault-detection-analysis">JMP-FASTMAN: All-in-One Tool for Data Exploration and Fault Detection Analysis</a> <span class="talk-tag talk-tag--poster">Poster</span></li>
+          </ul>
+        </li>
+        <li class="scholarship-card">
+          <h4><a href="https://www.aidic.it/escape34-pse24/index.php">ESCAPE 34 / PSE 24</a></h4>
+          <p>Florence, Italy · June 2–6, 2024</p>
+          <p class="related-talk-label">Related papers:</p>
+          <ul class="related-talk-papers">
+            <li><a href="https://doi.org/10.1016/B978-0-443-28824-1.50571-8">FASTMAN-JMP: All-in-One Tool for Data Mining and Model Building</a> <span class="talk-tag talk-tag--poster">Poster</span></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+      </article>
+      </div></div>
+      <div class="vertical-tail" aria-hidden="true"></div>
+    </div>
+  </dialog>
+</body>
 </html>
