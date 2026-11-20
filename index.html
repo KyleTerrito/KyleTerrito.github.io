@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Kyle Territo, chemical engineering PhD researcher at LSU. Research, software, and experience in process monitoring and control.">
   <title>Kyle Territo · Chemical Engineering</title>
-  <link rel="stylesheet" href="assets/portfolio/styles.css">
-  <script src="assets/portfolio/motion.js" defer></script>
-  <script src="assets/portfolio/details.js" defer></script>
+  <link rel="stylesheet" href="assets/portfolio/styles.css?v=mobile-swipe">
+  <script src="assets/portfolio/motion.js?v=mobile-swipe" defer></script>
+  <script src="assets/portfolio/details.js?v=mobile-swipe" defer></script>
 </head>
 <body>
   <div class="drafting-grid" aria-hidden="true"><canvas class="signal"></canvas></div>
@@ -73,6 +73,12 @@
           </section>
         </div>
         <a class="detail-toggle" href="details/about.html" data-detail="about-details" aria-label="Open About details" title="Open About details"><span class="chevron" aria-hidden="true"></span></a>
+      <article id="about-details" data-scene="about" class="inline-details">
+    <h2 id="about-detail-title" data-detail-heading tabindex="-1">About me</h2>
+    <p class="intro">I’m Kyle Territo, a chemical engineering PhD student at Louisiana State University.</p>
+    <p>I ran a lawn care and landscaping business while I was in school. Working with customers and making the day-to-day decisions taught me to take responsibility for the results of my work.</p>
+    <p><a href="details/experience.html" data-detail="experience-details">See my education and experience</a></p>
+        </article>
       </section>
       <section class="scene experience" id="experience" aria-labelledby="experience-title">
         <div class="composition">
@@ -87,86 +93,7 @@
           </dl>
         </div>
         <a class="detail-toggle" href="details/experience.html" data-detail="experience-details" aria-label="Open Education and Experience details" title="Open Experience details"><span class="chevron" aria-hidden="true"></span></a>
-      </section>
-      <section class="scene research" id="research" aria-labelledby="research-title">
-        <div class="composition">
-          <div>
-            <p class="label">Research Interests</p>
-            <h2 id="research-title">Making sense of process data.</h2>
-            <p class="intro">I work on methods for comparing industrial time series, detecting abnormal behavior, and tuning process controllers.</p>
-          </div>
-          <dl class="experience-list">
-            <div><dt>Process monitoring</dt><dd>How can we recognize when a process starts behaving differently?</dd></div>
-            <div><dt>Time-series analysis</dt><dd>How can we compare similar patterns that unfold at different speeds?</dd></div>
-            <div><dt>Process control</dt><dd>How can data help us tune a controller?</dd></div>
-          </dl>
-        </div>
-        <a class="detail-toggle" href="details/research.html" data-detail="research-details" aria-label="Open Research details" title="Open Research details"><span class="chevron" aria-hidden="true"></span></a>
-      </section>
-      <section class="scene software" id="software" aria-labelledby="software-title">
-        <div class="composition">
-          <div>
-            <p class="label">Software</p>
-            <h2 id="software-title">Tools for working with process data.</h2>
-            <p class="intro">My projects turn methods for exploring data, detecting faults, and tuning controllers into tools people can use.</p>
-          </div>
-          <figure class="feature project"><img src="assets/software/warp-map-6.png" alt="Warp Map software preview"><figcaption>Warp Map · Time-series visualization</figcaption></figure>
-        </div>
-        <a class="detail-toggle" href="details/software.html" data-detail="software-details" aria-label="Open Software details" title="Open Software details"><span class="chevron" aria-hidden="true"></span></a>
-      </section>
-      <section class="scene research" id="scholarship" aria-labelledby="scholarship-title">
-        <div class="composition">
-          <div>
-            <h2 id="scholarship-title">Papers &amp; Talks</h2>
-            <p class="intro papers-summary">I’ve had the privilege of collaborating with many people on my research. One highlight was seeing our paper, <a href="https://doi.org/10.1021/acs.iecr.5c05160"><strong>Graph-Based, Time-Warped Embedding for Time Series Analysis and Process Monitoring</strong></a>, featured on the front cover of <em>Industrial &amp; Engineering Chemistry Research</em>.</p>
-            <p class="intro papers-summary conference-summary">I’ve presented my research at <strong><span class="conference-count">7</span> conferences</strong>, <strong><span class="conference-count">4</span> of them international</strong>. I also had the opportunity to serve as a session chair at the iCHEAP conference in Florence, Italy in summer of 2025.</p>
-          </div>
-          <figure class="feature cover">
-            <img src="assets/iecred.2026.65.issue-8.xlargecover.jpg" alt="Front cover of Industrial &amp; Engineering Chemistry Research, volume 65, issue 8">
-            <figcaption><a class="cover-credit" href="https://doi.org/10.1021/acs.iecr.5c05160">Featured on the I&amp;EC Research front cover</a></figcaption>
-          </figure>
-        </div>
-        <a class="detail-toggle" href="details/research.html#publications" data-detail="scholarship-details" aria-label="Open Publications and Presentations details" title="Open Publications and Presentations details"><span class="chevron" aria-hidden="true"></span></a>
-      </section>
-    </div>
-    <p class="swipe-hint">Swipe sideways to browse · Swipe up for details</p>
-  </main>
-  <dialog class="detail-panel" aria-labelledby="about-detail-title">
-    <div class="panel-bar">
-      <button type="button" class="button detail-toggle close-panel" aria-label="Close details" title="Close details" autofocus>Close details <span class="chevron" aria-hidden="true"></span></button>
-    </div>
-    <div class="vertical-progress" aria-hidden="true"></div>
-    <div class="panel-content" tabindex="0" aria-label="Scroll to read details">
-      <div class="vertical-stage"><div class="vertical-camera">
-      <article id="about-details" data-scene="about" hidden>
-    <h2 id="about-detail-title" data-detail-heading tabindex="-1">About me</h2>
-    <p class="intro">I’m Kyle Territo, a chemical engineering PhD student at Louisiana State University.</p>
-    <p>I ran a lawn care and landscaping business while I was in school. Working with customers and making the day-to-day decisions taught me to take responsibility for the results of my work.</p>
-    <p><a href="details/experience.html" data-detail="experience-details">See my education and experience</a></p>
-        </article>
-      <article id="research-details" data-scene="research" hidden>
-    <h2 id="research-detail-title" data-detail-heading tabindex="-1">Research</h2>
-    <p class="intro">My work spans time-series analysis, fault detection, and data-driven process control.</p>
-    <h3>Time-series alignment</h3>
-    <p>Industrial processes can exhibit similar patterns at different speeds. My work with J. A. Romagnoli explores graph-based time-warped embeddings to compare those patterns for process monitoring.</p>
-    <h3>Fault diagnosis</h3>
-    <p>I’m interested in recognizing when a process shifts away from normal operation and using data to help identify possible causes.</p>
-    <h3>Process control</h3>
-    <p>I study data-driven approaches to tuning PID controllers.</p>
-    <p><a href="details/research.html#publications" data-detail="publications">See related publications</a></p>
-        </article>
-      <article id="software-details" data-scene="software" hidden>
-    <h2 id="software-detail-title" data-detail-heading tabindex="-1">Software</h2>
-    <h3>Warp Map</h3>
-    <p>A visual tool for exploring time-series alignment.</p>
-    <img src="assets/software/warp-map-6.png" alt="Warp Map software preview">
-    <h3>GeauxTune</h3>
-    <p>A software project focused on controller tuning.</p>
-    <img src="assets/software/geaux-tune-4.png" alt="GeauxTune software preview" loading="lazy">
-    <h3>FASTMAN-JMP</h3>
-    <p>A JMP tool for data exploration, model building, and fault detection analysis.</p>
-        </article>
-      <article id="experience-details" data-scene="experience" hidden>
+      <article id="experience-details" data-scene="experience" class="inline-details">
     <h2 id="experience-detail-title" data-detail-heading tabindex="-1">Education &amp; Experience</h2>
     <section class="resume-section resume-section--with-photo" aria-labelledby="education-title">
       <h3 class="resume-section-title" id="education-title">Education</h3>
@@ -236,7 +163,69 @@
       </ul>
     </section>
         </article>
-      <article id="scholarship-details" data-scene="scholarship" hidden>
+      </section>
+      <section class="scene research" id="research" aria-labelledby="research-title">
+        <div class="composition">
+          <div>
+            <p class="label">Research Interests</p>
+            <h2 id="research-title">Making sense of process data.</h2>
+            <p class="intro">I work on methods for comparing industrial time series, detecting abnormal behavior, and tuning process controllers.</p>
+          </div>
+          <dl class="experience-list">
+            <div><dt>Process monitoring</dt><dd>How can we recognize when a process starts behaving differently?</dd></div>
+            <div><dt>Time-series analysis</dt><dd>How can we compare similar patterns that unfold at different speeds?</dd></div>
+            <div><dt>Process control</dt><dd>How can data help us tune a controller?</dd></div>
+          </dl>
+        </div>
+        <a class="detail-toggle" href="details/research.html" data-detail="research-details" aria-label="Open Research details" title="Open Research details"><span class="chevron" aria-hidden="true"></span></a>
+      <article id="research-details" data-scene="research" class="inline-details">
+    <h2 id="research-detail-title" data-detail-heading tabindex="-1">Research</h2>
+    <p class="intro">My work spans time-series analysis, fault detection, and data-driven process control.</p>
+    <h3>Time-series alignment</h3>
+    <p>Industrial processes can exhibit similar patterns at different speeds. My work with J. A. Romagnoli explores graph-based time-warped embeddings to compare those patterns for process monitoring.</p>
+    <h3>Fault diagnosis</h3>
+    <p>I’m interested in recognizing when a process shifts away from normal operation and using data to help identify possible causes.</p>
+    <h3>Process control</h3>
+    <p>I study data-driven approaches to tuning PID controllers.</p>
+    <p><a href="details/research.html#publications" data-detail="publications">See related publications</a></p>
+        </article>
+      </section>
+      <section class="scene software" id="software" aria-labelledby="software-title">
+        <div class="composition">
+          <div>
+            <p class="label">Software</p>
+            <h2 id="software-title">Tools for working with process data.</h2>
+            <p class="intro">My projects turn methods for exploring data, detecting faults, and tuning controllers into tools people can use.</p>
+          </div>
+          <figure class="feature project"><img src="assets/software/warp-map-6.png" alt="Warp Map software preview"><figcaption>Warp Map · Time-series visualization</figcaption></figure>
+        </div>
+        <a class="detail-toggle" href="details/software.html" data-detail="software-details" aria-label="Open Software details" title="Open Software details"><span class="chevron" aria-hidden="true"></span></a>
+      <article id="software-details" data-scene="software" class="inline-details">
+    <h2 id="software-detail-title" data-detail-heading tabindex="-1">Software</h2>
+    <h3>Warp Map</h3>
+    <p>A visual tool for exploring time-series alignment.</p>
+    <img src="assets/software/warp-map-6.png" alt="Warp Map software preview">
+    <h3>GeauxTune</h3>
+    <p>A software project focused on controller tuning.</p>
+    <img src="assets/software/geaux-tune-4.png" alt="GeauxTune software preview" loading="lazy">
+    <h3>FASTMAN-JMP</h3>
+    <p>A JMP tool for data exploration, model building, and fault detection analysis.</p>
+        </article>
+      </section>
+      <section class="scene research" id="scholarship" aria-labelledby="scholarship-title">
+        <div class="composition">
+          <div>
+            <h2 id="scholarship-title">Papers &amp; Talks</h2>
+            <p class="intro papers-summary">I’ve had the privilege of collaborating with many people on my research. One highlight was seeing our paper, <a href="https://doi.org/10.1021/acs.iecr.5c05160"><strong>Graph-Based, Time-Warped Embedding for Time Series Analysis and Process Monitoring</strong></a>, featured on the front cover of <em>Industrial &amp; Engineering Chemistry Research</em>.</p>
+            <p class="intro papers-summary conference-summary">I’ve presented my research at <strong><span class="conference-count">7</span> conferences</strong>, <strong><span class="conference-count">4</span> of them international</strong>. I also had the opportunity to serve as a session chair at the iCHEAP conference in Florence, Italy in summer of 2025.</p>
+          </div>
+          <figure class="feature cover">
+            <img src="assets/iecred.2026.65.issue-8.xlargecover.jpg" alt="Front cover of Industrial &amp; Engineering Chemistry Research, volume 65, issue 8">
+            <figcaption><a class="cover-credit" href="https://doi.org/10.1021/acs.iecr.5c05160">Featured on the I&amp;EC Research front cover</a></figcaption>
+          </figure>
+        </div>
+        <a class="detail-toggle" href="details/research.html#publications" data-detail="scholarship-details" aria-label="Open Publications and Presentations details" title="Open Publications and Presentations details"><span class="chevron" aria-hidden="true"></span></a>
+      <article id="scholarship-details" data-scene="scholarship" class="inline-details">
     <h2 id="scholarship-detail-title" data-detail-heading tabindex="-1">Papers &amp; Talks</h2>
     <h3 id="publications" tabindex="-1">Publications</h3>
     <section class="scholarship-year" aria-label="2026">
@@ -396,6 +385,17 @@
       </ul>
     </section>
       </article>
+      </section>
+    </div>
+    <p class="swipe-hint">Swipe sideways to browse · Swipe up for details</p>
+  </main>
+  <dialog class="detail-panel" aria-labelledby="about-detail-title">
+    <div class="panel-bar">
+      <button type="button" class="button detail-toggle close-panel" aria-label="Close details" title="Close details" autofocus>Close details <span class="chevron" aria-hidden="true"></span></button>
+    </div>
+    <div class="vertical-progress" aria-hidden="true"></div>
+    <div class="panel-content" tabindex="0" aria-label="Scroll to read details">
+      <div class="vertical-stage"><div class="vertical-camera">
       </div></div>
       <div class="vertical-tail" aria-hidden="true"></div>
     </div>

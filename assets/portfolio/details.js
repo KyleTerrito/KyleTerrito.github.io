@@ -1,11 +1,6 @@
 const panel = document.querySelector('.detail-panel');
 const panelContent = panel.querySelector('.panel-content');
-const detailArticles = [...panelContent.querySelectorAll('[data-scene]')];
-const articleSlots = detailArticles.map(article => {
-  const slot = document.createComment('desktop detail position');
-  article.before(slot);
-  return slot;
-});
+const detailArticles = [...stage.querySelectorAll('[data-scene]')];
 const closePanel = panel.querySelector('.close-panel');
 const verticalCamera = panel.querySelector('.vertical-camera');
 let opener;
@@ -19,7 +14,7 @@ let overviewScrollLeft;
 
 function syncInlineDetails() {
   if (panel.open) return;
-  detailArticles.forEach((article, index) => {
+  detailArticles.forEach(article => {
     const scene = document.getElementById(article.dataset.scene);
     article.classList.toggle('inline-details', mobile.matches);
     article.hidden = !mobile.matches;
@@ -27,7 +22,7 @@ function syncInlineDetails() {
     article.style.removeProperty('visibility');
     article.style.removeProperty('transform');
     if (mobile.matches) scene.append(article);
-    else articleSlots[index].after(article);
+    else verticalCamera.append(article);
   });
 }
 

@@ -336,16 +336,20 @@ figcaption { color: var(--muted); font-size: .875rem; margin-top: .75rem; }
   .bar:not(.detail-bar) .section-nav { order: 3; grid-column: 1 / -1; }
   .section-nav a { padding: 4px 2px; }
 }
+@media (min-width: 761px) {
+  .stage .inline-details { display: none; }
+}
 @media (max-width: 760px) {
   .section-nav a { font-size: .75rem; min-height: 32px; display: grid; place-items: center; }
   .section-nav .track { display: block; }
+  .stage { padding-top: 16px; }
   .stage .camera {
     position: relative;
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 100%;
     gap: 12px;
-    height: calc(100svh - var(--header-height) - 34px);
+    height: calc(100svh - var(--header-height) - 50px);
     min-height: 200px;
     padding-inline: 12px;
     overflow: auto hidden;
@@ -366,7 +370,7 @@ figcaption { color: var(--muted); font-size: .875rem; margin-top: .75rem; }
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
-  .stage .composition { align-content: center; min-height: max(0px, calc(100svh - var(--header-height) - 150px)); }
+  .stage .composition { align-content: center; min-height: max(0px, calc(100svh - var(--header-height) - 166px)); }
   .stage .scene > .detail-toggle {
     position: static;
     translate: none;
