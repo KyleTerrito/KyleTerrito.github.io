@@ -124,7 +124,8 @@ h1, h2 { font: 600 clamp(2.5rem, 5.5vw, 6.5rem)/1 system-ui, sans-serif; letter-
 .button:hover { text-decoration: underline; }
 .detail-toggle { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 44px; padding: .55rem .9rem; }
 .detail-toggle:hover { background: #87e1ec18; }
-.scene > .detail-toggle {
+.scene-overview { display: contents; }
+.scene-overview > .detail-toggle {
   position: absolute;
   left: 50%;
   bottom: 8px;
@@ -135,8 +136,8 @@ h1, h2 { font: 600 clamp(2.5rem, 5.5vw, 6.5rem)/1 system-ui, sans-serif; letter-
   border-radius: 8px;
   color: var(--accent);
 }
-.scene > .detail-toggle .chevron { width: 22px; height: 22px; border-width: 0 3px 3px 0; translate: 0 -5px; }
-.vertical-camera .scene > .detail-toggle .chevron { rotate: 225deg; translate: 0 5px; }
+.scene-overview > .detail-toggle .chevron { width: 22px; height: 22px; border-width: 0 3px 3px 0; translate: 0 -5px; }
+.vertical-camera .scene-overview > .detail-toggle .chevron { rotate: 225deg; translate: 0 5px; }
 :root:not(.enhanced) .stage .scene, .enhanced .stage .scene.reading-view, .vertical-camera .scene { cursor: pointer; }
 .enhanced .stage .scene:not(.reading-view) .detail-toggle {
   visibility: hidden;
@@ -340,7 +341,8 @@ figcaption { color: var(--muted); font-size: .875rem; margin-top: .75rem; }
   .stage .inline-details { display: none; }
 }
 @media (max-width: 760px) {
-  .section-nav a { font-size: .75rem; min-height: 32px; display: grid; place-items: center; }
+  .bar:not(.detail-bar) { padding-inline: 14px; }
+  .section-nav a { font-size: clamp(.68rem, 2.7vw, .8rem); min-height: 35px; display: grid; place-items: center; line-height: 1.15; }
   .section-nav .track { display: block; }
   .stage { padding-top: 16px; }
   .stage .camera {
@@ -364,14 +366,33 @@ figcaption { color: var(--muted); font-size: .875rem; margin-top: .75rem; }
     align-items: stretch;
     min-height: 0;
     margin: 0;
-    padding: clamp(16px, 4vw, 26px);
+    padding: 0;
+    gap: 14px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
     overflow: hidden auto;
     overscroll-behavior-y: contain;
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
-  .stage .composition { align-content: center; min-height: max(0px, calc(100svh - var(--header-height) - 166px)); }
-  .stage .scene > .detail-toggle {
+  .stage .scene-overview, .stage .inline-details {
+    flex: none;
+    min-width: 0;
+    min-height: 100%;
+    padding: clamp(14px, 4.5vw, 24px);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--glass-tint, #202c34e8), #121b22eb 76%);
+  }
+  .stage .scene-overview { display: flex; flex-direction: column; justify-content: center; }
+  .stage .composition { align-content: center; flex: 1; min-width: 0; }
+  .stage .composition > * { min-width: 0; }
+  .stage .label { margin-bottom: .55rem; font-size: .75rem; }
+  .stage .composition h2 { font-size: clamp(1.85rem, 7.6vw, 3rem); line-height: 1.04; }
+  .stage .composition .intro { margin-top: .7rem; font-size: .95rem; line-height: 1.5; }
+  .stage .scene-overview > .detail-toggle {
     position: static;
     translate: none;
     flex: none;
@@ -379,32 +400,32 @@ figcaption { color: var(--muted); font-size: .875rem; margin-top: .75rem; }
     margin: .55rem auto 0;
   }
   .inline-details {
-    flex: none;
-    min-width: 0;
-    margin-top: .8rem;
-    padding-top: 1.35rem;
-    border-top: 1px solid var(--line);
     overflow-wrap: anywhere;
+    transform-origin: center top;
   }
+  .stage .inline-details h2 { font-size: clamp(1.9rem, 7vw, 2.6rem); line-height: 1.08; }
+  .stage .inline-details .scholarship-card, .stage .inline-details .resume-entry { padding: .8rem; }
+  .stage .inline-details .resume-entry { grid-template-columns: minmax(0, 1fr); }
+  .stage .inline-details .resume-date { text-align: left; }
   .swipe-hint { display: block; margin: 0; padding: .45rem .75rem; text-align: center; font-size: .75rem; color: var(--muted); }
   @media (prefers-reduced-motion: no-preference) {
-    .stage .composition { scale: var(--swipe-scale, 1); }
+    .stage :is(.scene-overview, .inline-details) { scale: var(--mobile-card-scale, 1); }
   }
   :root:not(.enhanced) .stage .scene { cursor: auto; }
-  .composition { grid-template-columns: 1fr; gap: 20px; }
+  .composition { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .about-identity { flex-wrap: nowrap; }
   .portrait { width: clamp(72px, 22vw, 105px); }
   .about h1 br { display: none; }
-  .about-contact > p { margin-bottom: .8rem; }
+  .stage .about-contact h2 { font-size: 1.25rem; }
+  .about-contact > p { margin: .45rem 0 .75rem; font-size: .85rem; }
   .contact-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .contact-tile { grid-template-columns: 29px minmax(0, 1fr); column-gap: 7px; padding: 8px; }
-  .contact-icon { width: 29px; height: 29px; }
+  .contact-tile { grid-template-columns: 26px minmax(0, 1fr); column-gap: 7px; min-height: 44px; padding: 7px; }
+  .contact-icon { grid-row: auto; width: 26px; height: 26px; }
+  .contact-icon img { width: 19px; height: 19px; }
   .contact-name { font-size: .875rem; }
-  .contact-destination { font-size: .75rem; }
+  .contact-destination { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .detail-panel { overscroll-behavior: contain; }
-  .cover { justify-self: start; }
-}
-@media (max-width: 345px) {
-  .contact-tile { grid-template-columns: minmax(0, 1fr); }
-  .contact-icon { grid-row: auto; justify-self: start; margin-bottom: .3rem; }
+  .cover { justify-self: center; }
+  .cover img { max-height: min(31svh, 235px); }
+  .cover figcaption { font-size: .75rem; }
 }

@@ -65,9 +65,14 @@ function render() {
       const progress = distance ? Math.min(last, Math.max(0, camera.scrollLeft / distance)) : 0;
       current = Math.round(progress);
       track.style.setProperty('--progress', `${progress / last * 100}%`);
-      scenes.forEach((scene, index) => {
-        const away = Math.min(1, Math.abs(index - progress));
-        scene.style.setProperty('--swipe-scale', 1 - .045 * away);
+      const { scale: sidewaysScale } = transitionAt(progress % 1, .26);
+      scenes.forEach(scene => {
+        const details = scene.querySelector('.inline-details');
+        const overview = scene.querySelector('.scene-overview');
+        const distanceToDetails = details ? details.offsetTop - overview.offsetTop : 0;
+        const phase = distanceToDetails ? Math.min(1, Math.max(0, scene.scrollTop / distanceToDetails)) : 0;
+        const { scale: verticalScale } = transitionAt(phase, .23);
+        scene.style.setProperty('--mobile-card-scale', Math.min(sidewaysScale, verticalScale));
       });
     } else {
       current = scenes.findLastIndex(scene => scene.getBoundingClientRect().top <= stage.offsetTop + 24);
@@ -162,6 +167,6 @@ window.addEventListener('resize', () => {
 });
 motion.addEventListener('change', syncMotion);
 mobile.addEventListener('change', syncMotion);
-camera.addEventListener('scroll', scheduleRender, { passive: true });
+camera.addEventListener('scroll', scheduleRender, { passive: true, capture: true });
 drawSignal();
 syncMotion();
