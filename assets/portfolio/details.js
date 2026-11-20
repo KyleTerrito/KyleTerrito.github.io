@@ -10,11 +10,13 @@ let transitionHeight = 0;
 let leftTop = false;
 let dismissing = false;
 let ignoreUpwardWheelUntil = 0;
+let mobileFrameWidth = 0;
 
 function layoutVertical() {
   if (!panel.open || !detailArticle) return;
-  panel.classList.toggle('static-details', !motion.matches);
-  if (!motion.matches) {
+  const animate = motion.matches || (mobileZoom.matches && mobileFrameWidth === innerWidth);
+  panel.classList.toggle('static-details', !animate);
+  if (!animate) {
     transitionHeight = 0;
     restoreScene();
     detailArticle.style.removeProperty('transform');
@@ -24,7 +26,7 @@ function layoutVertical() {
   }
   moveScene(detailArticle.dataset.scene);
   const height = panelContent.clientHeight;
-  transitionHeight = Math.round(height * 1.35);
+  transitionHeight = Math.round(height * (motion.matches ? 1.35 : .82));
   panelContent.style.setProperty('--reading-height', height + 'px');
   panelContent.style.setProperty('--reading-center', height / 2 + 'px');
   panelContent.style.setProperty('--transition-height', transitionHeight + 'px');
@@ -38,7 +40,8 @@ function updateVerticalZoom() {
   panel.style.setProperty('--detail-progress', Math.min(1, Math.max(0, panelContent.scrollTop / readingRange)));
   const phase = transitionHeight ? Math.min(1, Math.max(0, panelContent.scrollTop / transitionHeight)) : 1;
   panel.classList.toggle('reading-details', phase > .14);
-  const { travel, scale } = transitionAt(phase, sharedScene.element.id === 'about' ? .29 : .21);
+  const depth = motion.matches ? (sharedScene.element.id === 'about' ? .29 : .21) : .14;
+  const { travel, scale } = transitionAt(phase, depth);
   const spacing = scale * panelContent.clientHeight + 24;
   sharedScene.element.style.transform = 'translateY(' + (-travel * spacing) + 'px) scale(' + scale + ')';
   detailArticle.style.transform = 'translateY(' + ((1 - travel) * spacing) + 'px) scale(' + scale + ')';
@@ -50,15 +53,16 @@ function updateVerticalZoom() {
 function matchSharedFrame(scene) {
   const bounds = scene.getBoundingClientRect();
   const headerHeight = document.querySelector('.bar').offsetHeight;
-  if (!motion.matches) return;
-  if (bounds.top < headerHeight - 1 || bounds.bottom > innerHeight + 1) return;
-  if (motion.matches && !scene.classList.contains('reading-view')) return;
+  if (!motion.matches && !mobileZoom.matches) return false;
+  if (bounds.top < headerHeight - 1 || bounds.bottom > innerHeight + 1) return false;
+  if (motion.matches && !scene.classList.contains('reading-view')) return false;
   panel.style.setProperty('--card-top', bounds.top + 'px');
   panel.style.setProperty('--card-left', bounds.left + 'px');
   panel.style.setProperty('--card-right', 'auto');
   panel.style.setProperty('--card-bottom', 'auto');
   panel.style.setProperty('--card-width', bounds.width + 'px');
   panel.style.setProperty('--card-height', bounds.height + 'px');
+  return true;
 }
 
 function clearSharedFrame() {
@@ -114,7 +118,8 @@ function showDetail(target) {
   const heading = article.querySelector('[data-detail-heading]');
   panel.setAttribute('aria-labelledby', heading.id);
   if (!panel.open) {
-    if (target === article) matchSharedFrame(document.getElementById(article.dataset.scene));
+    const matchedFrame = target === article && matchSharedFrame(document.getElementById(article.dataset.scene));
+    mobileFrameWidth = matchedFrame && !motion.matches ? innerWidth : 0;
     panel.showModal();
     document.documentElement.classList.add('panel-open');
   }
@@ -160,6 +165,7 @@ document.addEventListener('click', event => {
       event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   let link = event.target.closest('[data-detail]');
   if (!link) {
+    if (innerWidth <= 760) return;
     const scene = event.target.closest('.scene');
     if (!scene || event.target.closest('a, button, input, select, textarea, label, [contenteditable]') ||
         !window.getSelection()?.isCollapsed ||
@@ -186,7 +192,10 @@ window.addEventListener('wheel', event => {
   if (!panel.open && !event.ctrlKey && event.deltaY < 0 && performance.now() < ignoreUpwardWheelUntil) event.preventDefault();
 }, { passive: false });
 motion.addEventListener('change', layoutVertical);
+mobileZoom.addEventListener('change', layoutVertical);
 window.addEventListener('resize', () => {
+  if (panel.open && !motion.matches && mobileFrameWidth === innerWidth) return;
+  mobileFrameWidth = 0;
   clearSharedFrame();
   layoutVertical();
 });

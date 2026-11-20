@@ -337,6 +337,24 @@ figcaption { color: var(--muted); font-size: .875rem; margin-top: .75rem; }
 }
 @media (max-width: 760px) {
   .section-nav a { font-size: .75rem; }
+  .mobile-zoom .section-nav .track { display: block; }
+  .mobile-zoom .stage .scene { scale: var(--mobile-scale, 1); }
+  :root:not(.enhanced) .stage .scene { cursor: auto; }
+  .scene { min-height: calc(82svh - var(--header-height)); }
   .composition { grid-template-columns: 1fr; }
+  .about-contact > p { margin-bottom: .8rem; }
+  .contact-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .contact-tile { grid-template-columns: 29px minmax(0, 1fr); column-gap: 7px; padding: 8px; }
+  .contact-icon { width: 29px; height: 29px; }
+  .contact-name { font-size: .875rem; }
+  .contact-destination { font-size: .75rem; }
+  .detail-panel { overscroll-behavior: contain; }
+  .detail-panel:not(.static-details) .panel-bar { top: 6px; right: 10px; }
+  .detail-panel:not(.static-details) .close-panel { font-size: .875rem; min-height: 40px; }
+  .detail-panel:not(.static-details) .vertical-camera article { padding-top: 58px; }
   .cover { justify-self: start; }
+}
+@media (max-width: 345px) {
+  .contact-tile { grid-template-columns: minmax(0, 1fr); }
+  .contact-icon { grid-row: auto; justify-self: start; margin-bottom: .3rem; }
 }

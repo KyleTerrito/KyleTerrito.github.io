@@ -6,6 +6,7 @@ const links = [...document.querySelectorAll('.section-nav a')];
 const track = document.querySelector('.track');
 const signal = document.querySelector('.signal');
 const motion = matchMedia('(min-width: 761px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)');
+const mobileZoom = matchMedia('(max-width: 760px) and (prefers-reduced-motion: no-preference)');
 const restoringHistory = performance.getEntriesByType('navigation')[0]?.type === 'back_forward';
 let frame = 0;
 
@@ -56,7 +57,24 @@ function render() {
   frame = 0;
   if (root.classList.contains('panel-open')) return;
   if (!motion.matches) {
-    const current = scenes.findLastIndex(scene => scene.getBoundingClientRect().top <= stage.offsetTop + 24);
+    let current = scenes.findLastIndex(scene => scene.getBoundingClientRect().top <= stage.offsetTop + 24);
+    if (mobileZoom.matches) {
+      const top = window.scrollY + stage.offsetTop;
+      const end = root.scrollHeight - innerHeight;
+      if (window.scrollY >= end - 2) current = scenes.length - 1;
+      const active = Math.max(0, current);
+      const next = scenes[active + 1];
+      const start = scenes[active].offsetTop;
+      const fraction = next ? ease((top - start) / Math.max(1, next.offsetTop - start)) : 0;
+      track.style.setProperty('--progress', `${(active + fraction) / (scenes.length - 1) * 100}%`);
+      scenes.forEach(scene => {
+        const upper = scene.offsetTop - top;
+        const lower = upper + scene.offsetHeight;
+        const approach = ease((innerHeight - stage.offsetTop - upper) / 160);
+        const departure = ease((160 - lower) / 160);
+        scene.style.setProperty('--mobile-scale', 1 - .085 * Math.max(1 - approach, departure));
+      });
+    }
     links.forEach((link, index) => {
       if (index === Math.max(0, current)) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
@@ -104,6 +122,7 @@ function jump(hash, behavior) {
 
 function syncMotion() {
   root.classList.toggle('enhanced', motion.matches);
+  root.classList.toggle('mobile-zoom', mobileZoom.matches);
   if (!motion.matches) {
     ['--grid-x', '--grid-y', '--signal-opacity'].forEach(property => root.style.removeProperty(property));
     scenes.forEach(scene => {
@@ -137,5 +156,6 @@ window.addEventListener('resize', () => {
   scheduleRender();
 });
 motion.addEventListener('change', syncMotion);
+mobileZoom.addEventListener('change', syncMotion);
 drawSignal();
 syncMotion();
