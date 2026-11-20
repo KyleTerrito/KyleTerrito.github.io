@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Kyle Territo, chemical engineering PhD researcher at LSU. Research, software, and experience in process monitoring and control.">
   <title>Kyle Territo · Chemical Engineering</title>
-  <link rel="stylesheet" href="assets/portfolio/styles.css?v=mobile-camera">
-  <script src="assets/portfolio/motion.js?v=mobile-camera" defer></script>
-  <script src="assets/portfolio/details.js?v=mobile-camera" defer></script>
+  <link rel="stylesheet" href="assets/portfolio/styles.css?v=warp-map-figures">
+  <script src="assets/portfolio/research-demos.js?v=rosenbrock-surface" defer></script>
+  <script src="assets/portfolio/about-gallery.js?v=photo-dots" defer></script>
+  <script src="assets/portfolio/motion.js?v=about-focus" defer></script>
+  <script src="assets/portfolio/details.js?v=background-ticker" defer></script>
 </head>
 <body>
   <div class="drafting-grid" aria-hidden="true"><canvas class="signal"></canvas></div>
@@ -19,20 +21,20 @@
       <a href="#experience" aria-label="Education and Experience">Background</a>
       <a href="#research" aria-label="Research Interests">Research</a>
       <a href="#software">Software</a>
-      <a href="#scholarship" aria-label="Publications and Presentations">Papers &amp; Talks</a>
+      <a href="#scholarship">Research Output</a>
       <span class="track" aria-hidden="true"></span>
     </nav>
   </header>
   <main class="stage">
     <div class="camera">
-      <section class="scene about" id="about" aria-labelledby="about-title" tabindex="-1">
+      <section class="scene about" id="about" aria-labelledby="about-title">
         <div class="scene-overview">
           <div class="composition">
             <div>
               <p class="label">About</p>
               <div class="about-identity">
-                <figure class="portrait"><img src="assets/IMG_9887.JPG" width="2160" height="2700" alt="Portrait of Kyle Territo"></figure>
-                <h1 id="about-title">Kyle <br>Territo</h1>
+                <figure class="portrait"><img src="assets/About/IMG_9887.JPG" width="2160" height="2700" alt="Portrait of Kyle Territo"></figure>
+              <h1 id="about-title" tabindex="-1">Kyle <br>Territo</h1>
               </div>
               <p class="intro">I’m Kyle. I’m a chemical engineering PhD student at LSU, and I ran a lawn care business while I was in school.</p>
             </div>
@@ -51,22 +53,22 @@
                   <span class="contact-destination">(225) 380-6023</span>
                 </a>
                 <a class="contact-tile" href="https://www.linkedin.com/in/kyle-territo/">
-                  <span class="contact-icon linkedin-mark" aria-hidden="true">in</span>
+                  <img class="contact-icon" src="assets/About/linkedin-logo.png" width="36" height="36" alt="">
                   <span class="contact-name">LinkedIn</span>
                   <span class="contact-destination">Kyle Territo</span>
                 </a>
                 <a class="contact-tile" href="https://www.instagram.com/kyleterrito/">
-                  <span class="contact-icon instagram-mark" aria-hidden="true"></span>
+                  <img class="contact-icon" src="assets/About/instagram-logo.png" width="36" height="36" alt="">
                   <span class="contact-name">Instagram</span>
                   <span class="contact-destination">@kyleterrito</span>
                 </a>
                 <a class="contact-tile" href="https://github.com/KyleTerrito">
-                  <span class="contact-icon github-mark" aria-hidden="true"><img src="assets/github-invertocat-white.png" width="24" height="24" alt=""></span>
+                  <span class="contact-icon github-mark" aria-hidden="true"><img src="assets/About/github-invertocat-white.png" width="24" height="24" alt=""></span>
                   <span class="contact-name">GitHub</span>
                   <span class="contact-destination">@KyleTerrito</span>
                 </a>
                 <a class="contact-tile" href="https://orcid.org/0009-0002-1133-915X">
-                  <span class="contact-icon orcid-mark" aria-hidden="true">iD</span>
+                  <img class="contact-icon" src="assets/About/orcid-logo.png" width="36" height="36" alt="">
                   <span class="contact-name">ORCID</span>
                   <span class="contact-destination">0009-0002-1133-915X</span>
                 </a>
@@ -77,9 +79,53 @@
         </div>
       <article id="about-details" data-scene="about" class="inline-details">
     <h2 id="about-detail-title" data-detail-heading tabindex="-1">About me</h2>
-    <p class="intro">I’m Kyle Territo, a chemical engineering PhD student at Louisiana State University.</p>
-    <p>I ran a lawn care and landscaping business while I was in school. Working with customers and making the day-to-day decisions taught me to take responsibility for the results of my work.</p>
-    <p><a href="details/experience.html" data-detail="experience-details">See my education and experience</a></p>
+    <div class="about-story">
+      <section class="about-story-section about-hometown">
+        <div>
+          <h3>Louisiana roots</h3>
+          <p>I was born at Woman’s Hospital on Airline Highway and raised here in Baton Rouge. I ended up going to school right down the road at LSU. The old hospital site is only about <strong>5½ miles from LSU’s Memorial Tower</strong> in a straight line.</p>
+          <p>Louisiana really is <strong>Sportsman’s Paradise</strong>, and the culture and food here are the best.</p>
+        </div>
+        <figure class="about-photo">
+          <img src="assets/About/louisiana-baton-rouge.png?v=red-star" width="960" height="640" alt="Map of Louisiana with a red star marking Baton Rouge" loading="lazy">
+        </figure>
+      </section>
+      <section class="about-story-section about-story-split about-story-reverse">
+        <div>
+          <h3>Growing up as a triplet</h3>
+          <p>Fun fact about me: I was born a triplet. I like to say teamwork came built in. The best perk was having three birthday cake options.</p>
+        </div>
+        <div class="about-gallery" data-about-gallery role="group" aria-label="Triplet photos">
+          <figure class="about-photo about-photo--family">
+            <img src="assets/About/5976CCFB-815C-4360-BCE9-DF4200884BEC.png" width="750" height="1334" alt="Kyle and his siblings as newborn triplets" loading="lazy">
+          </figure>
+          <figure class="about-photo about-photo--family">
+            <img src="assets/About/B109E081-E7EA-48E9-B578-630653F22185.png" width="750" height="1334" alt="The three siblings posing together as children" loading="lazy">
+          </figure>
+        </div>
+      </section>
+      <section class="about-story-section about-story-split">
+        <div>
+          <h3>A Louisiana football weekend</h3>
+          <p>Growing up in Louisiana made it easy to pick my teams. I cheer for the LSU Tigers on Saturdays and the Saints on Sundays. Unfortunately, both teams seem to think a comfortable win would spoil the fun.</p>
+        </div>
+        <div class="about-team-logos">
+          <img src="assets/About/lsu-tigers-logo.png" width="520" height="514" alt="LSU Tigers logo" loading="lazy">
+          <img src="assets/About/new-orleans-saints-logo.png" width="500" height="500" alt="New Orleans Saints logo" loading="lazy">
+        </div>
+      </section>
+      <section class="about-story-section about-story-split about-story-reverse">
+        <div>
+          <h3>A love of the outdoors</h3>
+          <p>I’ve always loved being outdoors, especially when I can get out on the water or spend a day in the woods. Hunting and fishing with my dad are two of my favorite ways to do that, and these photos bring back some of my favorite memories together.</p>
+        </div>
+        <div class="about-gallery about-gallery--outdoors" data-about-gallery role="group" aria-label="Hunting and fishing photos">
+          <figure class="about-photo"><img src="assets/About/2016-02-07%2008.50.17.JPG" width="2448" height="3264" alt="An early morning out on the water in a boat" loading="lazy"></figure>
+          <figure class="about-photo"><img src="assets/About/IMG_9479.jpeg" width="2645" height="1754" alt="Kyle fishing with his dad from the bank" loading="lazy"></figure>
+          <figure class="about-photo"><img src="assets/About/2015-01-09%2018.37.34.JPG" width="2448" height="3264" alt="Kyle on a deer hunt" loading="lazy"></figure>
+        </div>
+      </section>
+    </div>
         </article>
       </section>
       <section class="scene experience" id="experience" aria-labelledby="experience-title">
@@ -87,13 +133,28 @@
           <div class="composition">
             <div>
               <p class="label">Education &amp; Experience</p>
-              <h2 id="experience-title">From LSU to industry research.</h2>
+              <h2 id="experience-title">My path through engineering, research, and running a business.</h2>
             </div>
-            <dl class="experience-list">
-              <div><dt>Industrial process research</dt><dd>LSU research in collaboration with ExxonMobil</dd></div>
-              <div><dt>Chemical engineering</dt><dd>Bachelor’s degree and ongoing PhD study at LSU</dd></div>
-              <div><dt>Business ownership</dt><dd>Operated a lawn care and landscaping business</dd></div>
-            </dl>
+            <div class="background-media">
+              <figure class="stadium-photo">
+                <img src="assets/Background/tiger%20stadium.jpg" width="1920" height="1080" alt="LSU’s Tiger Stadium on game day" loading="lazy">
+                <figcaption>Tiger Stadium on game day</figcaption>
+              </figure>
+              <div class="ticker-window" tabindex="0" role="group" aria-label="Organizations from my background. Logo ticker pauses while focused.">
+                <div class="ticker-track">
+                  <ul class="ticker-logos">
+                    <li><img src="assets/Background/PSE-logo-9.png" alt="LSU Process Systems Engineering Research Group"></li>
+                    <li><img src="assets/Background/exxon.jpg" alt="ExxonMobil"></li>
+                    <li><img src="assets/Background/territo-lawn-trimming.png" alt="Territo Lawn Trimming"></li>
+                  </ul>
+                  <ul class="ticker-logos ticker-copy" aria-hidden="true">
+                    <li><img src="assets/Background/PSE-logo-9.png" alt=""></li>
+                    <li><img src="assets/Background/exxon.jpg" alt=""></li>
+                    <li><img src="assets/Background/territo-lawn-trimming.png" alt=""></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
           <a class="detail-toggle" href="details/experience.html" data-detail="experience-details" aria-label="Open Education and Experience details" title="Open Experience details"><span class="chevron" aria-hidden="true"></span></a>
         </div>
@@ -101,21 +162,20 @@
     <h2 id="experience-detail-title" data-detail-heading tabindex="-1">Education &amp; Experience</h2>
     <section class="resume-section resume-section--with-photo" aria-labelledby="education-title">
       <h3 class="resume-section-title" id="education-title">Education</h3>
-      <ul class="resume-entries" role="list">
+      <ol class="resume-entries resume-timeline" role="list">
         <li class="resume-entry">
           <div class="resume-identity">
-            <img class="resume-logo resume-logo--lsu" src="assets/experience/lsu-primary-logo.png" alt="">
+            <img class="resume-logo resume-logo--school" src="assets/Background/denham-springs-yellow-jackets.png" alt="Denham Springs Yellow Jackets mascot">
             <div>
-              <h4 class="resume-role">Doctor of Philosophy in Chemical Engineering</h4>
-              <p>Minor in Computer Science</p>
-              <p class="resume-organization">Louisiana State University (LSU) · Baton Rouge, LA</p>
+              <h4 class="resume-role">Denham Springs High School</h4>
+              <p class="resume-organization">Denham Springs, LA</p>
             </div>
           </div>
-          <p class="resume-date">Spring 2023 – Spring 2027 (expected)</p>
+          <p class="resume-date">Fall 2014 &ndash; Spring 2018</p>
         </li>
         <li class="resume-entry">
           <div class="resume-identity">
-            <img class="resume-logo resume-logo--lsu" src="assets/experience/lsu-primary-logo.png" alt="">
+            <img class="resume-logo resume-logo--lsu" src="assets/Background/lsu-primary-logo.png" alt="">
             <div>
               <h4 class="resume-role">Bachelor of Science in Chemical Engineering</h4>
               <p class="resume-organization">Louisiana State University (LSU) · Baton Rouge, LA</p>
@@ -123,48 +183,61 @@
           </div>
           <p class="resume-date">Fall 2018 – Fall 2022</p>
         </li>
-      </ul>
+        <li class="resume-entry">
+          <div class="resume-identity">
+            <img class="resume-logo resume-logo--lsu" src="assets/Background/lsu-primary-logo.png" alt="">
+            <div>
+              <h4 class="resume-role">Doctor of Philosophy in Chemical Engineering</h4>
+              <p class="resume-minor">Minor in Computer Science</p>
+              <p class="resume-organization">Louisiana State University (LSU) · Baton Rouge, LA</p>
+            </div>
+          </div>
+          <p class="resume-date">Spring 2023 – Spring 2027 (expected)</p>
+        </li>
+      </ol>
       <figure class="resume-photo">
-        <img src="assets/IMG_0373.JPG" width="2048" height="1536" alt="Kyle Territo at his LSU bachelor’s graduation" loading="lazy">
+        <img src="assets/Background/IMG_0373.JPG" width="2048" height="1536" alt="Kyle Territo at his LSU bachelor’s graduation" loading="lazy">
         <figcaption>LSU bachelor’s graduation · Fall 2022</figcaption>
       </figure>
     </section>
-    <section class="resume-section" aria-labelledby="research-experience-title">
-      <h3 class="resume-section-title" id="research-experience-title">Research Experience</h3>
-      <ul class="resume-entries" role="list">
+    <section class="resume-section" aria-labelledby="experience-timeline-title">
+      <h3 class="resume-section-title" id="experience-timeline-title">Experience</h3>
+      <ol class="resume-entries resume-timeline" role="list">
+        <li class="resume-entry">
+          <div>
+            <h4 class="resume-role">Owner &amp; Operator</h4>
+            <p class="resume-organization">Lawn Care and Landscaping Business</p>
+          </div>
+          <p class="resume-date">Spring 2018 &ndash; Summer 2025</p>
+          <div class="resume-work-layout">
+            <div class="resume-work-story">
+              <p>I started with just a push mower and worked my way up to running a lawn care and landscaping business. It helped me pay my way through my senior year of high school, all of undergrad, and halfway through my PhD.</p>
+              <ul class="resume-duties">
+                <li>Worked directly with customers and learned to manage the day-to-day finances of a small business.</li>
+                <li>Planned routes, scheduled jobs, and maintained and repaired my equipment.</li>
+                <li>Took responsibility for getting jobs done and making things right when plans changed.</li>
+                <li>Most importantly, it taught me the value of hard work, pride in a job well done, attention to detail, and consistency.</li>
+              </ul>
+            </div>
+            <div class="about-gallery resume-work-gallery" data-about-gallery role="group" aria-label="Lawn care work photos">
+              <figure class="about-photo resume-work-crop"><img src="assets/Background/IMG_3013.jpg" width="750" height="1334" alt="Kyle mowing a lawn on a riding mower" loading="lazy"></figure>
+              <figure class="about-photo"><img src="assets/Background/IMG_3567.jpeg" width="4032" height="3024" alt="A riding mower on a freshly striped lawn" loading="lazy"></figure>
+            </div>
+          </div>
+        </li>
         <li class="resume-entry">
           <div>
             <h4 class="resume-role">Graduate Researcher</h4>
             <p class="resume-organization">Louisiana State University · Baton Rouge, LA</p>
           </div>
           <p class="resume-date">Spring 2023 – Present</p>
-          <div class="resume-partners">
-            <img class="resume-logo" src="assets/experience/PSE-logo-9.png" alt="Process Systems Engineering Research Group at LSU">
-            <img class="resume-logo" src="assets/experience/exxon.jpg" alt="ExxonMobil">
-          </div>
           <ul class="resume-duties">
-            <li>Conduct industrial process research under Prof. José Romagnoli in collaboration with researchers at ExxonMobil.</li>
-            <li>Develop data-driven methods for time-series analysis, process monitoring, and fault diagnosis.</li>
-            <li>Study approaches to PID controller tuning and build software for working with process data.</li>
+            <li>I conduct my doctoral research under the guidance of Prof. José Romagnoli at LSU. My work focuses on using industrial time-series data to monitor processes, diagnose faults, and improve process control.</li>
+            <li>ExxonMobil sponsors my research. Gregory Robertson, Mike Kurtz, and Estelle Gustafson from the Baton Rouge refinery team have mentored me and helped me understand how the problems I study show up in refinery operations.</li>
+            <li>The collaboration brings LSU’s research expertise together with the refinery team’s operating experience. That perspective helps me ask better research questions and think through what it would take to use the methods in practice. See <a href="details/research.html" data-detail="research-details">Research Interests</a> for more on the problems I work on.</li>
           </ul>
         </li>
-      </ul>
-    </section>
-    <section class="resume-section" aria-labelledby="work-experience-title">
-      <h3 class="resume-section-title" id="work-experience-title">Work Experience</h3>
-      <ul class="resume-entries" role="list">
-        <li class="resume-entry">
-          <div>
-            <h4 class="resume-role">Owner &amp; Operator</h4>
-            <p class="resume-organization">Lawn Care and Landscaping Business</p>
-          </div>
-          <p class="resume-date">Through Summer 2025</p>
-          <ul class="resume-duties">
-            <li>Started the business in high school and continued operating it during my PhD.</li>
-            <li>Worked directly with clients, scheduled jobs, and handled business finances.</li>
-          </ul>
-        </li>
-      </ul>
+      </ol>
     </section>
         </article>
       </section>
@@ -173,26 +246,81 @@
           <div class="composition">
             <div>
               <p class="label">Research Interests</p>
-              <h2 id="research-title">Making sense of process data.</h2>
-              <p class="intro">I work on methods for comparing industrial time series, detecting abnormal behavior, and tuning process controllers.</p>
+              <h2 id="research-title">Data-driven engineering.</h2>
+              <p class="intro">I’m interested in solving real-world engineering problems with data-driven modeling, control, and optimization. I want to use data to understand how systems behave, predict what happens next, and make better decisions about how to operate them.</p>
             </div>
-            <dl class="experience-list">
-              <div><dt>Process monitoring</dt><dd>How can we recognize when a process starts behaving differently?</dd></div>
-              <div><dt>Time-series analysis</dt><dd>How can we compare similar patterns that unfold at different speeds?</dd></div>
-              <div><dt>Process control</dt><dd>How can data help us tune a controller?</dd></div>
-            </dl>
+            <div class="research-demos">
+              <figure class="research-demo" data-research-demo="forecast" tabindex="0">
+                <figcaption>Prediction</figcaption>
+                <canvas width="600" height="280" role="img" aria-label="Forecast chart for a simulated signal" aria-describedby="forecast-status"></canvas>
+                <div class="forecast-legend">
+                  <span>Observed</span>
+                  <span>Forecast</span>
+                </div>
+                <p class="research-demo-status" id="forecast-status">Simulated signal</p>
+              </figure>
+              <figure class="research-demo" data-research-demo="lander" tabindex="0">
+                <figcaption>Control</figcaption>
+                <canvas width="600" height="280" role="img" aria-label="Illustrative lunar landing trials comparing late and early braking" aria-describedby="lander-status"></canvas>
+                <p class="research-demo-status" id="lander-status">Comparing braking strategies</p>
+              </figure>
+              <figure class="research-demo" data-research-demo="clustering" tabindex="0">
+                <figcaption>Clustering</figcaption>
+                <canvas width="600" height="280" role="img" aria-label="A scatter plot showing points grouped by their nearest cluster center" aria-describedby="clustering-status"></canvas>
+                <p class="research-demo-status" id="clustering-status">Unlabeled points</p>
+              </figure>
+              <figure class="research-demo" data-research-demo="optimization" tabindex="0">
+                <figcaption>Optimization</figcaption>
+                <canvas width="600" height="280" role="img" aria-label="A tilted 3D Rosenbrock surface with a gradient descent path toward the minimum" aria-describedby="optimization-status"></canvas>
+                <p class="research-demo-status" id="optimization-status">Following the gradient</p>
+              </figure>
+            </div>
           </div>
           <a class="detail-toggle" href="details/research.html" data-detail="research-details" aria-label="Open Research details" title="Open Research details"><span class="chevron" aria-hidden="true"></span></a>
         </div>
       <article id="research-details" data-scene="research" class="inline-details">
     <h2 id="research-detail-title" data-detail-heading tabindex="-1">Research</h2>
-    <p class="intro">My work spans time-series analysis, fault detection, and data-driven process control.</p>
-    <h3>Time-series alignment</h3>
-    <p>Industrial processes can exhibit similar patterns at different speeds. My work with J. A. Romagnoli explores graph-based time-warped embeddings to compare those patterns for process monitoring.</p>
-    <h3>Fault diagnosis</h3>
-    <p>I’m interested in recognizing when a process shifts away from normal operation and using data to help identify possible causes.</p>
-    <h3>Process control</h3>
-    <p>I study data-driven approaches to tuning PID controllers.</p>
+    <p class="intro">My doctoral research uses industrial time series to study how chemical processes behave and how we can monitor and control them. I use unsupervised learning to identify recurring operating conditions through process clustering and detect when a process departs from expected behavior. I also study data-driven approaches to process control, including PID autotuning.</p>
+    <h3>Fault detection and diagnosis framework</h3>
+    <p>The framework brings process modeling, fault detection, and fault diagnosis together. Offline, unsupervised learning identifies recurring operating patterns in historical sensor data. Online, incoming measurements are compared with those patterns to flag unusual behavior. A flagged event then gives engineers a starting point for investigating which variables changed and what might explain the disturbance.</p>
+    <figure class="research-figure">
+      <a href="assets/Research/warp-map-3.jpg" target="_blank" rel="noopener">
+        <img src="assets/Research/warp-map-3.jpg" width="1280" height="720" alt="Workflow diagram connecting sensor data, offline process modeling, online fault detection, and a diagnosis stage informed by process diagrams and feature contributions." loading="lazy">
+      </a>
+      <figcaption>The framework connects offline process modeling with online fault detection and diagnosis.</figcaption>
+    </figure>
+    <h3>WARP-MaP</h3>
+    <p>José A. Romagnoli and I developed WARP-MaP to address a problem in time-series process modeling: the same process event can occur at different speeds or with different delays. Comparing measurements at fixed time points can obscure those similarities. WARP-MaP uses dynamic time warping to align windows of multivariate data and puts similar windows near each other in a two-dimensional graph. The map reveals recurring patterns, and an adaptive threshold helps flag unusual behavior online. <a href="https://doi.org/10.1021/acs.iecr.5c05160">Read the WARP-MaP paper</a>.</p>
+    <div class="research-figure-pair">
+      <figure class="research-figure">
+        <a href="assets/Research/warp-map-2.gif" target="_blank" rel="noopener">
+          <img src="assets/Research/warp-map-2.gif" width="1000" height="700" alt="Two time-series traces above a color-coded dynamic time warping distance matrix." loading="lazy">
+        </a>
+        <figcaption>Dynamic time warping compares patterns that unfold at different speeds.</figcaption>
+      </figure>
+      <figure class="research-figure">
+        <a href="assets/Research/warp-map-1.png" target="_blank" rel="noopener">
+          <img src="assets/Research/warp-map-1.png" width="1501" height="1047" alt="WARP-MaP logo showing connected blue and green nodes over a warped grid." loading="lazy">
+        </a>
+        <figcaption>The WARP-MaP logo illustrates the link between time warping and graph-based modeling.</figcaption>
+      </figure>
+    </div>
+    <h3>Agentic frameworks for fault diagnosis</h3>
+    <p>I’m currently developing agentic workflows that help engineers investigate what happened after a monitoring system flags unusual behavior. I’m exploring how an AI agent can use diagnostic tools to compare current trends with operating history, examine process relationships, and summarize possible causes with the supporting evidence. This builds on our work combining graph-based monitoring with language-model-assisted diagnosis. <a href="https://psecommunity.org/LAPSE:2026.0512">Read the AI-assisted diagnosis paper</a>.</p>
+    <div class="research-figure-pair">
+      <figure class="research-figure">
+        <a href="assets/Research/agent-control-room.png" target="_blank" rel="noopener">
+          <img src="assets/Research/agent-control-room.png" width="1149" height="806" alt="Concept illustration of a process control room with multiple monitoring stations." loading="lazy">
+        </a>
+        <figcaption>Concept illustration of agent-assisted process monitoring in a control room.</figcaption>
+      </figure>
+      <figure class="research-figure">
+        <a href="assets/Research/agentic-network.png" target="_blank" rel="noopener">
+          <img src="assets/Research/agentic-network.png" width="1759" height="835" alt="Network diagram showing a diagnostic workflow branching into parallel tasks and reconverging." loading="lazy">
+        </a>
+        <figcaption>An agentic workflow coordinates several diagnostic tasks and combines their findings.</figcaption>
+      </figure>
+    </div>
     <p><a href="details/research.html#publications" data-detail="publications">See related publications</a></p>
         </article>
       </section>
@@ -204,39 +332,54 @@
               <h2 id="software-title">Tools for working with process data.</h2>
               <p class="intro">My projects turn methods for exploring data, detecting faults, and tuning controllers into tools people can use.</p>
             </div>
-            <figure class="feature project"><img src="assets/software/warp-map-6.png" alt="Warp Map software preview"><figcaption>Warp Map · Time-series visualization</figcaption></figure>
+            <figure class="feature project"><img src="assets/Software/warp-map-preview.png" alt="Warp Map software preview"><figcaption>Warp Map · Time-series visualization</figcaption></figure>
           </div>
           <a class="detail-toggle" href="details/software.html" data-detail="software-details" aria-label="Open Software details" title="Open Software details"><span class="chevron" aria-hidden="true"></span></a>
         </div>
       <article id="software-details" data-scene="software" class="inline-details">
     <h2 id="software-detail-title" data-detail-heading tabindex="-1">Software</h2>
-    <h3>Warp Map</h3>
-    <p>A visual tool for exploring time-series alignment.</p>
-    <img src="assets/software/warp-map-6.png" alt="Warp Map software preview">
-    <h3>GeauxTune</h3>
-    <p>A software project focused on controller tuning.</p>
-    <img src="assets/software/geaux-tune-4.png" alt="GeauxTune software preview" loading="lazy">
-    <h3>FASTMAN-JMP</h3>
-    <p>A JMP tool for data exploration, model building, and fault detection analysis.</p>
+    <div class="software-projects">
+      <section class="software-project">
+        <img src="assets/Software/fastman.png" alt="" loading="lazy">
+        <h3>FastMAN</h3>
+        <p>A JMP tool for exploring multivariate data, building models, and investigating potential process faults.</p>
+      </section>
+      <section class="software-project">
+        <img src="assets/Software/navigator-logo-7.png" alt="" loading="lazy">
+        <h3>Unit Navigator</h3>
+        <p>A software project for exploring industrial process units.</p>
+      </section>
+      <section class="software-project">
+        <img src="assets/Software/geauxtune-preview.png" alt="" loading="lazy">
+        <h3>GeauxTune</h3>
+        <p>An educational tool for exploring process control concepts and controller tuning.</p>
+      </section>
+      <section class="software-project">
+        <img src="assets/Software/auto-pilot.png" alt="" loading="lazy">
+        <h3>AUTO-PILOT</h3>
+        <p>A research platform that uses reinforcement learning to explore autonomous process control.</p>
+      </section>
+    </div>
         </article>
       </section>
       <section class="scene research" id="scholarship" aria-labelledby="scholarship-title">
         <div class="scene-overview">
           <div class="composition">
             <div>
-              <h2 id="scholarship-title">Papers &amp; Talks</h2>
+              <p class="label">Publications &amp; Presentations</p>
+              <h2 id="scholarship-title">Sharing my research</h2>
               <p class="intro papers-summary">I’ve had the privilege of collaborating with many people on my research. One highlight was seeing our paper, <a href="https://doi.org/10.1021/acs.iecr.5c05160"><strong>Graph-Based, Time-Warped Embedding for Time Series Analysis and Process Monitoring</strong></a>, featured on the front cover of <em>Industrial &amp; Engineering Chemistry Research</em>.</p>
               <p class="intro papers-summary conference-summary">I’ve presented my research at <strong><span class="conference-count">7</span> conferences</strong>, <strong><span class="conference-count">4</span> of them international</strong>. I also had the opportunity to serve as a session chair at the iCHEAP conference in Florence, Italy in summer of 2025.</p>
             </div>
             <figure class="feature cover">
-              <img src="assets/iecred.2026.65.issue-8.xlargecover.jpg" alt="Front cover of Industrial &amp; Engineering Chemistry Research, volume 65, issue 8">
+              <img src="assets/Research%20Output/iecred.2026.65.issue-8.xlargecover.jpg" alt="Front cover of Industrial &amp; Engineering Chemistry Research, volume 65, issue 8">
               <figcaption><a class="cover-credit" href="https://doi.org/10.1021/acs.iecr.5c05160">Featured on the I&amp;EC Research front cover</a></figcaption>
             </figure>
           </div>
           <a class="detail-toggle" href="details/research.html#publications" data-detail="scholarship-details" aria-label="Open Publications and Presentations details" title="Open Publications and Presentations details"><span class="chevron" aria-hidden="true"></span></a>
         </div>
       <article id="scholarship-details" data-scene="scholarship" class="inline-details">
-    <h2 id="scholarship-detail-title" data-detail-heading tabindex="-1">Papers &amp; Talks</h2>
+    <h2 id="scholarship-detail-title" data-detail-heading tabindex="-1">Research Output</h2>
     <h3 id="publications" tabindex="-1">Publications</h3>
     <section class="scholarship-year" aria-label="2026">
       <p class="scholarship-year-label">2026</p>

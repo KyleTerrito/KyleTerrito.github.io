@@ -4,7 +4,7 @@
 
 [Visit my portfolio](https://kyleterrito.github.io/)
 
-<img src="assets/IMG_0373.JPG" alt="Kyle Territo at his LSU bachelor’s graduation" width="320">
+<img src="assets/Background/IMG_0373.JPG" alt="Kyle Territo at his LSU bachelor’s graduation" width="320">
 
 ## About me
 

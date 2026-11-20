@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Research · Kyle Territo</title>
-  <link rel="stylesheet" href="../assets/portfolio/styles.css">
+  <link rel="stylesheet" href="../assets/portfolio/styles.css?v=warp-map-figures">
 </head>
 <body>
   <header class="bar detail-bar">
@@ -13,9 +13,47 @@
   </header>
   <main class="detail">
     <h1>Research</h1>
-    <p class="intro">My work spans time-series analysis, fault detection, and data-driven process control.</p>
-    <h2>Time-series alignment</h2>
-    <p>Industrial processes can exhibit similar patterns at different speeds. My work with J. A. Romagnoli explores graph-based time-warped embeddings to compare those patterns for process monitoring.</p>
+    <p class="intro">My doctoral research uses industrial time series to study how chemical processes behave and how we can monitor and control them. I use unsupervised learning to identify recurring operating conditions through process clustering and detect when a process departs from expected behavior. I also study data-driven approaches to process control, including PID autotuning.</p>
+    <h2>Fault detection and diagnosis framework</h2>
+    <p>The framework brings process modeling, fault detection, and fault diagnosis together. Offline, unsupervised learning identifies recurring operating patterns in historical sensor data. Online, incoming measurements are compared with those patterns to flag unusual behavior. A flagged event then gives engineers a starting point for investigating which variables changed and what might explain the disturbance.</p>
+    <figure class="research-figure">
+      <a href="../assets/Research/warp-map-3.jpg" target="_blank" rel="noopener">
+        <img src="../assets/Research/warp-map-3.jpg" width="1280" height="720" alt="Workflow diagram connecting sensor data, offline process modeling, online fault detection, and a diagnosis stage informed by process diagrams and feature contributions." loading="lazy">
+      </a>
+      <figcaption>The framework connects offline process modeling with online fault detection and diagnosis.</figcaption>
+    </figure>
+    <h2>WARP-MaP</h2>
+    <p>José A. Romagnoli and I developed WARP-MaP to address a problem in time-series process modeling: the same process event can occur at different speeds or with different delays. Comparing measurements at fixed time points can obscure those similarities. WARP-MaP uses dynamic time warping to align windows of multivariate data and puts similar windows near each other in a two-dimensional graph. The map reveals recurring patterns, and an adaptive threshold helps flag unusual behavior online. <a href="https://doi.org/10.1021/acs.iecr.5c05160">Read the WARP-MaP paper</a>.</p>
+    <div class="research-figure-pair">
+      <figure class="research-figure">
+        <a href="../assets/Research/warp-map-2.gif" target="_blank" rel="noopener">
+          <img src="../assets/Research/warp-map-2.gif" width="1000" height="700" alt="Two time-series traces above a color-coded dynamic time warping distance matrix." loading="lazy">
+        </a>
+        <figcaption>Dynamic time warping compares patterns that unfold at different speeds.</figcaption>
+      </figure>
+      <figure class="research-figure">
+        <a href="../assets/Research/warp-map-1.png" target="_blank" rel="noopener">
+          <img src="../assets/Research/warp-map-1.png" width="1501" height="1047" alt="WARP-MaP logo showing connected blue and green nodes over a warped grid." loading="lazy">
+        </a>
+        <figcaption>The WARP-MaP logo illustrates the link between time warping and graph-based modeling.</figcaption>
+      </figure>
+    </div>
+    <h2>Agentic frameworks for fault diagnosis</h2>
+    <p>I’m currently developing agentic workflows that help engineers investigate what happened after a monitoring system flags unusual behavior. I’m exploring how an AI agent can use diagnostic tools to compare current trends with operating history, examine process relationships, and summarize possible causes with the supporting evidence. This builds on our work combining graph-based monitoring with language-model-assisted diagnosis. <a href="https://psecommunity.org/LAPSE:2026.0512">Read the AI-assisted diagnosis paper</a>.</p>
+    <div class="research-figure-pair">
+      <figure class="research-figure">
+        <a href="../assets/Research/agent-control-room.png" target="_blank" rel="noopener">
+          <img src="../assets/Research/agent-control-room.png" width="1149" height="806" alt="Concept illustration of a process control room with multiple monitoring stations." loading="lazy">
+        </a>
+        <figcaption>Concept illustration of agent-assisted process monitoring in a control room.</figcaption>
+      </figure>
+      <figure class="research-figure">
+        <a href="../assets/Research/agentic-network.png" target="_blank" rel="noopener">
+          <img src="../assets/Research/agentic-network.png" width="1759" height="835" alt="Network diagram showing a diagnostic workflow branching into parallel tasks and reconverging." loading="lazy">
+        </a>
+        <figcaption>An agentic workflow coordinates several diagnostic tasks and combines their findings.</figcaption>
+      </figure>
+    </div>
     <h2 id="publications">Publications</h2>
     <section class="scholarship-year" aria-label="2026">
       <p class="scholarship-year-label">2026</p>

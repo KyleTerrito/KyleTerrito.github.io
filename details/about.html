@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About me · Kyle Territo</title>
-  <link rel="stylesheet" href="../assets/portfolio/styles.css">
+  <link rel="stylesheet" href="../assets/portfolio/styles.css?v=outdoors-frame">
+  <script src="../assets/portfolio/about-gallery.js?v=photo-dots" defer></script>
 </head>
 <body>
   <header class="bar detail-bar">
@@ -13,10 +14,53 @@
   </header>
   <main class="detail">
     <h1>About me</h1>
-    <p class="intro">I’m Kyle Territo, a chemical engineering PhD student at Louisiana State University. I study industrial process monitoring and control, with an emphasis on methods that can be put to work in software.</p>
-    <h2>Education</h2>
-    <ul><li>PhD in Chemical Engineering, Louisiana State University · 2023–present</li><li>BS in Chemical Engineering, Louisiana State University · 2022</li></ul>
-    <p><a href="research.html">Explore my research</a></p>
+    <div class="about-story">
+      <section class="about-story-section about-hometown">
+        <div>
+          <h2>Louisiana roots</h2>
+          <p>I was born at Woman’s Hospital on Airline Highway and raised here in Baton Rouge. I ended up going to school right down the road at LSU. The old hospital site is only about <strong>5½ miles from LSU’s Memorial Tower</strong> in a straight line.</p>
+          <p>Louisiana really is <strong>Sportsman’s Paradise</strong>, and the culture and food here are the best.</p>
+        </div>
+        <figure class="about-photo">
+          <img src="../assets/About/louisiana-baton-rouge.png?v=red-star" width="960" height="640" alt="Map of Louisiana with a red star marking Baton Rouge" loading="lazy">
+        </figure>
+      </section>
+      <section class="about-story-section about-story-split about-story-reverse">
+        <div>
+          <h2>Growing up as a triplet</h2>
+          <p>Fun fact about me: I was born a triplet. I like to say teamwork came built in. The best perk was having three birthday cake options.</p>
+        </div>
+        <div class="about-gallery" data-about-gallery role="group" aria-label="Triplet photos">
+          <figure class="about-photo about-photo--family">
+            <img src="../assets/About/5976CCFB-815C-4360-BCE9-DF4200884BEC.png" width="750" height="1334" alt="Kyle and his siblings as newborn triplets" loading="lazy">
+          </figure>
+          <figure class="about-photo about-photo--family">
+            <img src="../assets/About/B109E081-E7EA-48E9-B578-630653F22185.png" width="750" height="1334" alt="The three siblings posing together as children" loading="lazy">
+          </figure>
+        </div>
+      </section>
+      <section class="about-story-section about-story-split">
+        <div>
+          <h2>A Louisiana football weekend</h2>
+          <p>Growing up in Louisiana made it easy to pick my teams. I cheer for the LSU Tigers on Saturdays and the Saints on Sundays. Unfortunately, both teams seem to think a comfortable win would spoil the fun.</p>
+        </div>
+        <div class="about-team-logos">
+          <img src="../assets/About/lsu-tigers-logo.png" width="520" height="514" alt="LSU Tigers logo" loading="lazy">
+          <img src="../assets/About/new-orleans-saints-logo.png" width="500" height="500" alt="New Orleans Saints logo" loading="lazy">
+        </div>
+      </section>
+      <section class="about-story-section about-story-split about-story-reverse">
+        <div>
+          <h2>A love of the outdoors</h2>
+          <p>I’ve always loved being outdoors, especially when I can get out on the water or spend a day in the woods. Hunting and fishing with my dad are two of my favorite ways to do that, and these photos bring back some of my favorite memories together.</p>
+        </div>
+        <div class="about-gallery about-gallery--outdoors" data-about-gallery role="group" aria-label="Hunting and fishing photos">
+          <figure class="about-photo"><img src="../assets/About/2016-02-07%2008.50.17.JPG" width="2448" height="3264" alt="An early morning out on the water in a boat" loading="lazy"></figure>
+          <figure class="about-photo"><img src="../assets/About/IMG_9479.jpeg" width="2645" height="1754" alt="Kyle fishing with his dad from the bank" loading="lazy"></figure>
+          <figure class="about-photo"><img src="../assets/About/2015-01-09%2018.37.34.JPG" width="2448" height="3264" alt="Kyle on a deer hunt" loading="lazy"></figure>
+        </div>
+      </section>
+    </div>
   </main>
 </body>
 </html>

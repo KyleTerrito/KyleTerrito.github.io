@@ -153,7 +153,7 @@ document.addEventListener('click', event => {
   jump(link.hash, link.classList.contains('skip') ? 'instant' : 'smooth');
   if (link.classList.contains('skip')) {
     render();
-    document.querySelector(link.hash).focus({ preventScroll: true });
+    document.getElementById('about-title').focus({ preventScroll: true });
   }
 });
 window.addEventListener('pageshow', event => {
