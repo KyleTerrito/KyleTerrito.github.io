@@ -6,7 +6,8 @@ const links = [...document.querySelectorAll('.section-nav a')];
 const track = document.querySelector('.track');
 const signal = document.querySelector('.signal');
 const motion = matchMedia('(min-width: 761px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)');
-const mobileZoom = matchMedia('(max-width: 760px) and (prefers-reduced-motion: no-preference)');
+const mobile = matchMedia('(max-width: 760px)');
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const restoringHistory = performance.getEntriesByType('navigation')[0]?.type === 'back_forward';
 let frame = 0;
 
@@ -57,23 +58,19 @@ function render() {
   frame = 0;
   if (root.classList.contains('panel-open')) return;
   if (!motion.matches) {
-    let current = scenes.findLastIndex(scene => scene.getBoundingClientRect().top <= stage.offsetTop + 24);
-    if (mobileZoom.matches) {
-      const top = window.scrollY + stage.offsetTop;
-      const end = root.scrollHeight - innerHeight;
-      if (window.scrollY >= end - 2) current = scenes.length - 1;
-      const active = Math.max(0, current);
-      const next = scenes[active + 1];
-      const start = scenes[active].offsetTop;
-      const fraction = next ? ease((top - start) / Math.max(1, next.offsetTop - start)) : 0;
-      track.style.setProperty('--progress', `${(active + fraction) / (scenes.length - 1) * 100}%`);
-      scenes.forEach(scene => {
-        const upper = scene.offsetTop - top;
-        const lower = upper + scene.offsetHeight;
-        const approach = ease((innerHeight - stage.offsetTop - upper) / 160);
-        const departure = ease((160 - lower) / 160);
-        scene.style.setProperty('--mobile-scale', 1 - .085 * Math.max(1 - approach, departure));
+    let current;
+    if (mobile.matches) {
+      const distance = scenes[1].offsetLeft - scenes[0].offsetLeft;
+      const last = scenes.length - 1;
+      const progress = distance ? Math.min(last, Math.max(0, camera.scrollLeft / distance)) : 0;
+      current = Math.round(progress);
+      track.style.setProperty('--progress', `${progress / last * 100}%`);
+      scenes.forEach((scene, index) => {
+        const away = Math.min(1, Math.abs(index - progress));
+        scene.style.setProperty('--swipe-scale', 1 - .045 * away);
       });
+    } else {
+      current = scenes.findLastIndex(scene => scene.getBoundingClientRect().top <= stage.offsetTop + 24);
     }
     links.forEach((link, index) => {
       if (index === Math.max(0, current)) link.setAttribute('aria-current', 'location');
@@ -116,13 +113,17 @@ function jump(hash, behavior) {
   const sceneHash = hash === '#contact' ? '#about' : hash;
   const index = scenes.findIndex(scene => '#' + scene.id === sceneHash);
   if (index < 0) return;
-  window.scrollTo({ top: scrollRange() * index / (scenes.length - 1), behavior });
+  if (mobile.matches) {
+    const left = scenes[index].offsetLeft - scenes[0].offsetLeft;
+    camera.scrollTo({ left, behavior: reduceMotion.matches ? 'instant' : behavior });
+  } else {
+    window.scrollTo({ top: scrollRange() * index / (scenes.length - 1), behavior });
+  }
   scheduleRender();
 }
 
 function syncMotion() {
   root.classList.toggle('enhanced', motion.matches);
-  root.classList.toggle('mobile-zoom', mobileZoom.matches);
   if (!motion.matches) {
     ['--grid-x', '--grid-y', '--signal-opacity'].forEach(property => root.style.removeProperty(property));
     scenes.forEach(scene => {
@@ -136,7 +137,7 @@ function syncMotion() {
 
 document.addEventListener('click', event => {
   const link = event.target.closest('a[href^="#"]');
-  if (!link || link.hasAttribute('data-detail') || !motion.matches || event.button !== 0 ||
+  if (!link || link.hasAttribute('data-detail') || (!motion.matches && !mobile.matches) || event.button !== 0 ||
       event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   event.preventDefault();
   if (location.hash !== link.hash) history.pushState(null, '', link.hash);
@@ -147,7 +148,7 @@ document.addEventListener('click', event => {
   }
 });
 window.addEventListener('pageshow', event => {
-  if (!event.persisted && !restoringHistory && motion.matches && location.hash) jump(location.hash, 'instant');
+  if (!event.persisted && !restoringHistory && (motion.matches || mobile.matches) && location.hash) jump(location.hash, 'instant');
   scheduleRender();
 });
 window.addEventListener('scroll', scheduleRender, { passive: true });
@@ -156,6 +157,7 @@ window.addEventListener('resize', () => {
   scheduleRender();
 });
 motion.addEventListener('change', syncMotion);
-mobileZoom.addEventListener('change', syncMotion);
+mobile.addEventListener('change', syncMotion);
+camera.addEventListener('scroll', scheduleRender, { passive: true });
 drawSignal();
 syncMotion();

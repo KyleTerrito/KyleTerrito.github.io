@@ -10,11 +10,11 @@ let transitionHeight = 0;
 let leftTop = false;
 let dismissing = false;
 let ignoreUpwardWheelUntil = 0;
-let mobileFrameWidth = 0;
+let overviewScrollLeft;
 
 function layoutVertical() {
   if (!panel.open || !detailArticle) return;
-  const animate = motion.matches || (mobileZoom.matches && mobileFrameWidth === innerWidth);
+  const animate = motion.matches;
   panel.classList.toggle('static-details', !animate);
   if (!animate) {
     transitionHeight = 0;
@@ -26,7 +26,7 @@ function layoutVertical() {
   }
   moveScene(detailArticle.dataset.scene);
   const height = panelContent.clientHeight;
-  transitionHeight = Math.round(height * (motion.matches ? 1.35 : .82));
+  transitionHeight = Math.round(height * 1.35);
   panelContent.style.setProperty('--reading-height', height + 'px');
   panelContent.style.setProperty('--reading-center', height / 2 + 'px');
   panelContent.style.setProperty('--transition-height', transitionHeight + 'px');
@@ -40,7 +40,7 @@ function updateVerticalZoom() {
   panel.style.setProperty('--detail-progress', Math.min(1, Math.max(0, panelContent.scrollTop / readingRange)));
   const phase = transitionHeight ? Math.min(1, Math.max(0, panelContent.scrollTop / transitionHeight)) : 1;
   panel.classList.toggle('reading-details', phase > .14);
-  const depth = motion.matches ? (sharedScene.element.id === 'about' ? .29 : .21) : .14;
+  const depth = sharedScene.element.id === 'about' ? .29 : .21;
   const { travel, scale } = transitionAt(phase, depth);
   const spacing = scale * panelContent.clientHeight + 24;
   sharedScene.element.style.transform = 'translateY(' + (-travel * spacing) + 'px) scale(' + scale + ')';
@@ -53,7 +53,7 @@ function updateVerticalZoom() {
 function matchSharedFrame(scene) {
   const bounds = scene.getBoundingClientRect();
   const headerHeight = document.querySelector('.bar').offsetHeight;
-  if (!motion.matches && !mobileZoom.matches) return false;
+  if (!motion.matches) return false;
   if (bounds.top < headerHeight - 1 || bounds.bottom > innerHeight + 1) return false;
   if (motion.matches && !scene.classList.contains('reading-view')) return false;
   panel.style.setProperty('--card-top', bounds.top + 'px');
@@ -118,8 +118,8 @@ function showDetail(target) {
   const heading = article.querySelector('[data-detail-heading]');
   panel.setAttribute('aria-labelledby', heading.id);
   if (!panel.open) {
-    const matchedFrame = target === article && matchSharedFrame(document.getElementById(article.dataset.scene));
-    mobileFrameWidth = matchedFrame && !motion.matches ? innerWidth : 0;
+    overviewScrollLeft = mobile.matches ? camera.scrollLeft : undefined;
+    if (target === article) matchSharedFrame(document.getElementById(article.dataset.scene));
     panel.showModal();
     document.documentElement.classList.add('panel-open');
   }
@@ -142,6 +142,8 @@ function hideDetail() {
   detailArticle = undefined;
   document.documentElement.classList.remove('panel-open');
   panel.close();
+  if (mobile.matches && overviewScrollLeft !== undefined) camera.scrollLeft = overviewScrollLeft;
+  overviewScrollLeft = undefined;
   clearSharedFrame();
   render();
   opener?.focus({ preventScroll: true });
@@ -192,10 +194,7 @@ window.addEventListener('wheel', event => {
   if (!panel.open && !event.ctrlKey && event.deltaY < 0 && performance.now() < ignoreUpwardWheelUntil) event.preventDefault();
 }, { passive: false });
 motion.addEventListener('change', layoutVertical);
-mobileZoom.addEventListener('change', layoutVertical);
 window.addEventListener('resize', () => {
-  if (panel.open && !motion.matches && mobileFrameWidth === innerWidth) return;
-  mobileFrameWidth = 0;
   clearSharedFrame();
   layoutVertical();
 });
@@ -217,7 +216,7 @@ window.addEventListener('pageshow', event => {
   const scene = target?.closest('[data-scene]')?.dataset.scene;
   if (!scene) return;
   if (!restoringHistory) {
-    if (motion.matches) jump('#' + scene, 'instant');
+    if (motion.matches || mobile.matches) jump('#' + scene, 'instant');
     else document.getElementById(scene).scrollIntoView();
   }
   showDetail(target);
