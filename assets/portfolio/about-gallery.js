@@ -6,7 +6,8 @@ document.querySelectorAll('[data-about-gallery]').forEach(gallery => {
   controls.className = 'about-gallery-controls';
   const count = document.createElement('span');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  let playing = !reducedMotion.matches;
+  const manual = gallery.dataset.aboutGallery === 'manual';
+  let playing = !manual && !reducedMotion.matches;
   let visible = false;
   let timer;
   count.className = 'about-gallery-count';
@@ -15,7 +16,7 @@ document.querySelectorAll('[data-about-gallery]').forEach(gallery => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'about-gallery-dot';
-    button.setAttribute('aria-label', `Show photo ${index + 1}`);
+    button.setAttribute('aria-label', `Show ${manual ? 'image' : 'photo'} ${index + 1}`);
     button.addEventListener('click', () => {
       setPlaying(false);
       showPhoto(index);
@@ -51,6 +52,9 @@ document.querySelectorAll('[data-about-gallery]').forEach(gallery => {
     updatePlayback();
   }
 
+  showPhoto(0);
+  if (manual) return;
+
   reducedMotion.addEventListener('change', () => {
     if (reducedMotion.matches) setPlaying(false);
   });
@@ -60,5 +64,4 @@ document.querySelectorAll('[data-about-gallery]').forEach(gallery => {
   }, { threshold: .25 });
   observer.observe(gallery);
   setPlaying(playing);
-  showPhoto(0);
 });

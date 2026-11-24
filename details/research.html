@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Research · Kyle Territo</title>
-  <link rel="stylesheet" href="../assets/portfolio/styles.css?v=warp-map-figures">
+  <link rel="stylesheet" href="../assets/portfolio/styles.css?v=consistent-captions">
+  <script src="../assets/portfolio/about-gallery.js?v=research-slideshow" defer></script>
 </head>
 <body>
   <header class="bar detail-bar">
@@ -26,21 +27,20 @@
     <p>José A. Romagnoli and I developed WARP-MaP to address a problem in time-series process modeling: the same process event can occur at different speeds or with different delays. Comparing measurements at fixed time points can obscure those similarities. WARP-MaP uses dynamic time warping to align windows of multivariate data and puts similar windows near each other in a two-dimensional graph. The map reveals recurring patterns, and an adaptive threshold helps flag unusual behavior online. <a href="https://doi.org/10.1021/acs.iecr.5c05160">Read the WARP-MaP paper</a>.</p>
     <div class="research-figure-pair">
       <figure class="research-figure">
-        <a href="../assets/Research/warp-map-2.gif" target="_blank" rel="noopener">
-          <img src="../assets/Research/warp-map-2.gif" width="1000" height="700" alt="Two time-series traces above a color-coded dynamic time warping distance matrix." loading="lazy">
-        </a>
-        <figcaption>Dynamic time warping compares patterns that unfold at different speeds.</figcaption>
-      </figure>
-      <figure class="research-figure">
         <a href="../assets/Research/warp-map-1.png" target="_blank" rel="noopener">
           <img src="../assets/Research/warp-map-1.png" width="1501" height="1047" alt="WARP-MaP logo showing connected blue and green nodes over a warped grid." loading="lazy">
         </a>
         <figcaption>The WARP-MaP logo illustrates the link between time warping and graph-based modeling.</figcaption>
       </figure>
+      <figure class="research-figure">
+        <a href="../assets/Research/warp-map-1.gif" target="_blank" rel="noopener">
+          <img src="../assets/Research/warp-map-1.gif" width="1000" height="700" alt="WARP-MaP animation." loading="lazy">
+        </a>
+      </figure>
     </div>
     <h2>Agentic frameworks for fault diagnosis</h2>
     <p>I’m currently developing agentic workflows that help engineers investigate what happened after a monitoring system flags unusual behavior. I’m exploring how an AI agent can use diagnostic tools to compare current trends with operating history, examine process relationships, and summarize possible causes with the supporting evidence. This builds on our work combining graph-based monitoring with language-model-assisted diagnosis. <a href="https://psecommunity.org/LAPSE:2026.0512">Read the AI-assisted diagnosis paper</a>.</p>
-    <div class="research-figure-pair">
+    <div class="about-gallery research-gallery" data-about-gallery="manual" role="group" aria-label="Agentic framework slideshow">
       <figure class="research-figure">
         <a href="../assets/Research/agent-control-room.png" target="_blank" rel="noopener">
           <img src="../assets/Research/agent-control-room.png" width="1149" height="806" alt="Concept illustration of a process control room with multiple monitoring stations." loading="lazy">
